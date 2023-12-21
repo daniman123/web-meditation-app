@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { logMeditation } from "../services/database/dataBaseManager";
 import useAudioPlayer from "./useAudioPlayer";
+const audio = require("../../../assets/audio/singing-bowl.mp3");
 
 export const useTimer = (
   isActive: boolean,
@@ -17,9 +18,7 @@ export const useTimer = (
 
   useHandleInterval(isActive, updateSeconds, isRuntimePaused);
 
-  const playSound = useAudioPlayer(
-    "../../../assets/audio/singing-bowl_23042017-01-raw-71015.mp3"
-  );
+  const playSound = useAudioPlayer(audio);
 
   useEffect(() => {
     if (seconds <= 0) {

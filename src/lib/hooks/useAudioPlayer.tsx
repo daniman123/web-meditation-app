@@ -1,6 +1,6 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef } from "react";
 
-const useAudioPlayer = (src:string) => {
+const useAudioPlayer = (src: string) => {
   const audioRef = useRef(new Audio(src));
 
   const playAudio = useCallback(() => {
