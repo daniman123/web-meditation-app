@@ -1,9 +1,7 @@
-import { IHomePage } from './HomePage';
+import { IHomePage } from "./HomePage";
 
-const base: IHomePage = {
-  exampleProp: 'Hello world!',
-};
-    
+const base: IHomePage = {};
+
 export const mockHomePageProps = {
   base,
 };
