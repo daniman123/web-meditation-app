@@ -14,6 +14,12 @@
       "rules": {
         "storybook/hierarchy-separator": "error"
       }
+    },
+    {
+      "files": ["*.test.@(js|ts)", "*.spec.@(js|ts)"],
+      "rules": {
+        "no-undef": "off"
+      }
     }
   ],
   "rules": {
