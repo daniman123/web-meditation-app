@@ -1,25 +1,21 @@
+import { clearMeditationLog, logMeditation } from "./dataBaseManager";
+import { getFromLocalStorage } from "./utils";
+
 describe("LocalStorage Operations", () => {
   beforeEach(() => {
     localStorage.clear();
   });
 
-  it("should store a value of type array in LocalStorage", () => {
-    const key = "testKey";
-    const value = ["testValue"];
+  it("should clear meditationsLog", () => {
+    const key = "meditationsLog";
 
-    // Example function that uses localStorage
-    function saveToLocalStorage(key: string, value: string[]) {
-      localStorage.setItem(key, JSON.stringify(value)); // Serialize the value
-    }
+    logMeditation(60);
+    logMeditation(60);
 
-    function getFromLocalStorage(key: string) {
-      const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) : null; // Deserialize the value
-    }
+    clearMeditationLog();
 
-    saveToLocalStorage(key, value);
-    const storedValue = getFromLocalStorage(key);
+    const expectedStoredValue = getFromLocalStorage(key);
 
-    expect(storedValue).toEqual(value); // Use toEqual for array or object comparison
+    expect(expectedStoredValue).toEqual([]);
   });
 });
