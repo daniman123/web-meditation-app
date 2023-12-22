@@ -1,20 +1,16 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { MutableRefObject, useCallback, useEffect, useState } from "react";
 import { logMeditation } from "../services/database/dataBaseManager";
 
-// const audioUrl = "/singing-bowl.wav";
-
 export const useTimer = (
-  soundEffect: HTMLAudioElement,
+  soundEffect: MutableRefObject<HTMLAudioElement | undefined>,
   isActive: boolean,
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>,
   initialSeconds: number,
   isRuntimePaused: boolean
 ) => {
   const [seconds, setSeconds] = useState(initialSeconds);
-
-  // const { isReady, loadAudio, playAudio } = useAudioPlayer(audioUrl);
 
   const updateSeconds = useCallback(() => {
     setSeconds((prevSeconds) => (prevSeconds > 0 ? prevSeconds - 1 : 0));
@@ -27,9 +23,10 @@ export const useTimer = (
       console.log("Timer has finished or reset.");
       logMeditation(initialSeconds);
       setIsActive(false);
-
-      soundEffect.src = "/singing-bowl.wav";
-      soundEffect.play().then();
+      if (soundEffect.current) {
+        soundEffect.current.src = "/singing-bowl.wav";
+        soundEffect.current.play().then();
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seconds, setIsActive, initialSeconds]);
