@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
+"use client";
 
+import { useCallback, useEffect, useState } from "react";
 import { logMeditation } from "../services/database/dataBaseManager";
-import useAudioPlayer from "./useAudioPlayer";
-const audio = require("../../../assets/audio/singing-bowl.mp3");
+
+const audioUrl = "/singing-bowl.mp3";
 
 export const useTimer = (
   isActive: boolean,
@@ -18,15 +19,13 @@ export const useTimer = (
 
   useHandleInterval(isActive, updateSeconds, isRuntimePaused);
 
-  const playSound = useAudioPlayer(audio);
-
   useEffect(() => {
     if (seconds <= 0) {
       console.log("Timer has finished or reset.");
       logMeditation(initialSeconds);
       setIsActive(false);
-
-      playSound();
+      const audio = new Audio(audioUrl);
+      audio.play();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seconds, setIsActive, initialSeconds]);

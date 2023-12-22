@@ -18,3 +18,8 @@ export const formatTimeValueDisplay = (value: number): string => {
   }
 };
 
+export const timeValueOptions = () => [
+  ...Array.from({ length: 2 }, (_, i) => 5 + 5 * i),
+  ...Array.from({ length: 3 }, (_, i) => 15 + 15 * i),
+  ...Array.from({ length: 60 }, (_, i) => 60 + 60 * i),
+];

@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       backgroundImage: {
         "home-screen": "url('/nature-scene_1.png')",
+        "meditation-screen": "url('/nature-scene_2.png')",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
