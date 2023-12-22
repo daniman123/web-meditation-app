@@ -6,7 +6,7 @@ const useAudioPlayer = (audioFile: string) => {
   const [isReady, setIsReady] = useState(false);
 
   const loadAudio = async () => {
-    const context = new (window.AudioContext || window.webkitAudioContext)();
+    const context = new window.AudioContext();
     const response = await fetch(audioFile);
     const arrayBuffer = await response.arrayBuffer();
     context.decodeAudioData(arrayBuffer, (audioBuffer) => {
@@ -25,7 +25,6 @@ const useAudioPlayer = (audioFile: string) => {
     }
   };
 
-  // Expose the API of the hook
   return { loadAudio, playAudio, isReady };
 };
 
