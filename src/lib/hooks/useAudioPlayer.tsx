@@ -7,7 +7,7 @@ const useAudioPlayer = (audioFile: string) => {
 
   const loadAudio = async () => {
     // @ts-ignore: Unreachable code erro
-    const context = new window.AudioContext() || window.webkitAudioContext();
+    const context = new window.AudioContext() || new window.webkitAudioContext();
     const response = await fetch(audioFile);
     const arrayBuffer = await response.arrayBuffer();
     context.decodeAudioData(arrayBuffer, (audioBuffer) => {

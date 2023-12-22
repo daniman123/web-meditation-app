@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { logMeditation } from "../services/database/dataBaseManager";
 import useAudioPlayer from "./useAudioPlayer";
 
-const audioUrl = "/singing-bowl.mp3";
+const audioUrl = "/singing-bowl.wav";
 
 export const useTimer = (
   isActive: boolean,
