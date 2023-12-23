@@ -30,7 +30,16 @@ const TimeValueSelection = ({
           setSeconds={setSeconds}
         />
 
-        <button onClick={toggleTimer}>&#x25B6;</button>
+        <div className="flex justify-center items-center h-24">
+          <button
+            className="w-16 h-16 rounded-full text-white font-bold text-xl bg-cyan-600"
+            onClick={toggleTimer}
+          >
+            <span className="inline-block rotate-90 translate-x-0.5">
+              &#9650;
+            </span>
+          </button>
+        </div>
       </div>
     );
   }

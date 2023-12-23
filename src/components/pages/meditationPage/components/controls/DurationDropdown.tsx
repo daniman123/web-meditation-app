@@ -15,7 +15,7 @@ const DurationDropdown = ({
   setSeconds,
 }: IDurationDropdown) => {
   return (
-    <div className="w-full flex justify-center p-5">
+    <div className="w-full flex justify-center items-center p-5 h-48">
       <select
         name="time-values"
         id=""
