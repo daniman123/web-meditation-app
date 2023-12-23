@@ -1,18 +1,15 @@
 import { formatTimeValueDisplay, timeValueOptions } from "@/lib/utils";
-import { Dispatch, SetStateAction } from "react";
 
 export interface IDurationDropdown {
-  selectedSeconds: number;
-  setSelectedSeconds: Dispatch<SetStateAction<number>>;
+  duration: number;
+  setDuration: React.Dispatch<React.SetStateAction<number>>;
   isActive: boolean;
-  setSeconds: Dispatch<SetStateAction<number>>;
 }
 
 const DurationDropdown = ({
-  selectedSeconds,
-  setSelectedSeconds,
+  duration,
+  setDuration,
   isActive,
-  setSeconds,
 }: IDurationDropdown) => {
   return (
     <div className="w-full flex justify-center items-center p-5 h-48">
@@ -20,12 +17,11 @@ const DurationDropdown = ({
         name="time-values"
         id=""
         className="w-1/2 h-10 shadow-2xl relative outline-none bg-black/20 rounded"
-        value={selectedSeconds}
+        value={duration}
         onChange={(itemValue) => {
           const value = parseInt(itemValue.target.value);
-          setSelectedSeconds(value);
           if (!isActive) {
-            setSeconds(value);
+            setDuration(value);
           }
         }}
       >

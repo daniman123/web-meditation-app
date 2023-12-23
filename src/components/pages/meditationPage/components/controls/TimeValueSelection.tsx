@@ -2,9 +2,8 @@ import TitleBanner from "@/components/ui/titleBanner/TitleBanner";
 import DurationDropdown from "./DurationDropdown";
 
 export interface ITimeValueSelection {
-  setSeconds: React.Dispatch<React.SetStateAction<number>>;
-  selectedSeconds: number;
-  setSelectedSeconds: React.Dispatch<React.SetStateAction<number>>;
+  duration: number;
+  setDuration: React.Dispatch<React.SetStateAction<number>>;
   isActive: boolean;
   toggleTimer: () => void;
   isRuntimePaused: boolean;
@@ -13,9 +12,9 @@ export interface ITimeValueSelection {
 const TimeValueSelection = ({
   isActive,
   isRuntimePaused,
-  selectedSeconds,
-  setSeconds,
-  setSelectedSeconds,
+  duration,
+  setDuration,
+
   toggleTimer,
 }: ITimeValueSelection) => {
   if (!isActive && !isRuntimePaused) {
@@ -25,9 +24,8 @@ const TimeValueSelection = ({
 
         <DurationDropdown
           isActive={isActive}
-          selectedSeconds={selectedSeconds}
-          setSelectedSeconds={setSelectedSeconds}
-          setSeconds={setSeconds}
+          duration={duration}
+          setDuration={setDuration}
         />
 
         <div className="flex justify-center items-center h-24">

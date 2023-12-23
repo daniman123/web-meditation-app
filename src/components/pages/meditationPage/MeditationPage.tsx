@@ -9,10 +9,8 @@ export interface IMeditationPage {}
 
 const MeditationPage = () => {
   const {
-    seconds,
-    setSeconds,
-    selectedSeconds,
-    setSelectedSeconds,
+    duration,
+    setDuration,
     isActive,
     resetTimer,
     toggleTimer,
@@ -21,11 +19,10 @@ const MeditationPage = () => {
   } = useMeditationTimer();
   return (
     <section className="h-[100dvh] w-[100dvw] bg-cover bg-center bg-no-repeat bg-meditation-screen">
-      
       <ReturnHomeButton />
-      
+
       <TimeDisplay
-        seconds={seconds}
+        seconds={duration}
         isActive={isActive}
         isRuntimePaused={isRuntimePaused}
         toggleActiveRuntime={toggleActiveRuntime}
@@ -35,9 +32,8 @@ const MeditationPage = () => {
       <TimeValueSelection
         isActive={isActive}
         isRuntimePaused={isRuntimePaused}
-        selectedSeconds={selectedSeconds}
-        setSeconds={setSeconds}
-        setSelectedSeconds={setSelectedSeconds}
+        duration={duration}
+        setDuration={setDuration}
         toggleTimer={toggleTimer}
       />
     </section>

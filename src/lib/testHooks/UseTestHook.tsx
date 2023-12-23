@@ -6,7 +6,7 @@ import useDurationExpired from "../hooks/useDurationExpired";
 import useHandleInterval from "../hooks/useHandleInterval";
 import useTimeStartDuration from "../hooks/useTimeStartDuration";
 
-const useMeditationTimer = () => {
+const UseTestHook = () => {
   const [duration, setDuration] = useState(5);
   const [isActive, setIsActive] = useState(false);
   const [isRuntimePaused, setIsRuntimePaused] = useState(false);
@@ -55,4 +55,4 @@ const useMeditationTimer = () => {
   };
 };
 
-export default useMeditationTimer;
+export default UseTestHook;
