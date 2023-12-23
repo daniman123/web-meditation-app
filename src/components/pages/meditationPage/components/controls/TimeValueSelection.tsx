@@ -1,4 +1,5 @@
-import { formatTimeValueDisplay, timeValueOptions } from "@/lib/utils";
+import TitleBanner from "@/components/ui/titleBanner/TitleBanner";
+import DurationDropdown from "./DurationDropdown";
 
 export interface ITimeValueSelection {
   setSeconds: React.Dispatch<React.SetStateAction<number>>;
@@ -20,25 +21,14 @@ const TimeValueSelection = ({
   if (!isActive && !isRuntimePaused) {
     return (
       <div className="grid">
-        <p>Select Duration</p>
-        <select
-          name="time-values"
-          id=""
-          value={selectedSeconds}
-          onChange={(itemValue) => {
-            const value = parseInt(itemValue.target.value);
-            setSelectedSeconds(value);
-            if (!isActive) {
-              setSeconds(value);
-            }
-          }}
-        >
-          {timeValueOptions().map((value, i) => (
-            <option key={i} value={value}>
-              {formatTimeValueDisplay(value)}
-            </option>
-          ))}
-        </select>
+        <TitleBanner title="Select Duration" fontSize="text-xl" />
+
+        <DurationDropdown
+          isActive={isActive}
+          selectedSeconds={selectedSeconds}
+          setSelectedSeconds={setSelectedSeconds}
+          setSeconds={setSeconds}
+        />
 
         <button onClick={toggleTimer}>&#x25B6;</button>
       </div>

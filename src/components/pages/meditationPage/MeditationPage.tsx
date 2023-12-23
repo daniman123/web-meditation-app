@@ -1,5 +1,6 @@
 "use client";
 
+import ReturnHomeButton from "@/components/ui/routerButton/returnHomeButton/ReturnHomeButton";
 import useMeditationTimer from "@/lib/hooks/useMeditationTimer";
 import TimeValueSelection from "./components/controls/TimeValueSelection";
 import TimeDisplay from "./components/display/TimeDisplay";
@@ -19,7 +20,10 @@ const MeditationPage = () => {
     isRuntimePaused,
   } = useMeditationTimer();
   return (
-    <section className="h-[100dvh] w-[100dvw] bg-cover bg-center bg-no-repeat bg-meditation-screen grid grid-rows-[.6fr_1.2fr_1.2fr]">
+    <section className="h-[100dvh] w-[100dvw] bg-cover bg-center bg-no-repeat bg-meditation-screen">
+      
+      <ReturnHomeButton />
+      
       <TimeDisplay
         seconds={seconds}
         isActive={isActive}
