@@ -7,7 +7,7 @@ import useHandleInterval from "../hooks/useHandleInterval";
 import useTimeStartDuration from "../hooks/useTimeStartDuration";
 
 const useMeditationTimer = () => {
-  const [duration, setDuration] = useState(5);
+  const [duration, setDuration] = useState(5000);
   const [isActive, setIsActive] = useState(false);
   const [isRuntimePaused, setIsRuntimePaused] = useState(false);
 
@@ -20,7 +20,8 @@ const useMeditationTimer = () => {
   const loggedStartDuration = useTimeStartDuration(isActive, duration);
 
   const updateSeconds = useCallback(() => {
-    setDuration((prevState) => (prevState > 0 ? prevState - 1 : 0));
+    setDuration((prevState) => (prevState > 0 ? prevState - 100 : 0));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -52,6 +53,7 @@ const useMeditationTimer = () => {
     resetTimer,
     toggleActiveRuntime,
     isRuntimePaused,
+    loggedStartDuration,
   };
 };
 

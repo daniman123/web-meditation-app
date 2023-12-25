@@ -26,7 +26,11 @@ const DurationDropdown = ({
         }}
       >
         {timeValueOptions().map((value, i) => (
-          <option key={i} className="text-center text-semibold" value={value}>
+          <option
+            key={i}
+            className="text-center text-semibold"
+            value={value * 1000}
+          >
             {formatTimeValueDisplay(value)}
           </option>
         ))}

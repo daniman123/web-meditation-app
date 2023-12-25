@@ -3,7 +3,7 @@ const formatMinutes = (minutes: number): string => {
 };
 
 const formatSeconds = (seconds: number): string => {
-  return `${seconds < 10 ? "0" : ""}${seconds}s`;
+  return `${seconds < 10 ? "0" : ""}${Math.ceil(seconds)}s`;
 };
 
 export const formatTimeValueDisplay = (value: number): string => {

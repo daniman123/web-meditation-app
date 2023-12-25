@@ -1,7 +1,7 @@
-import MeditationPage from "@/components/pages/meditationPage/MeditationPage";
+import AudioPlayer from "@/components/features/audioPlayer/AudioPlayer";
 
 const meditation = () => {
-  return <MeditationPage />;
+  return <AudioPlayer />;
 };
 
 export default meditation;

@@ -1,4 +1,4 @@
-import { formatTimeValueDisplay } from "@/lib/utils";
+import CountDownTimer from "@/components/ui/countDownTimer/CountDownTimer";
 
 export interface ITimeDisplay {
   seconds: number;
@@ -6,6 +6,7 @@ export interface ITimeDisplay {
   isRuntimePaused: boolean;
   toggleActiveRuntime: () => void;
   resetTimer: () => void;
+  loggedStartDuration: number;
 }
 const TimeDisplay = ({
   seconds,
@@ -13,14 +14,19 @@ const TimeDisplay = ({
   isRuntimePaused,
   toggleActiveRuntime,
   resetTimer,
+  loggedStartDuration,
 }: ITimeDisplay) => {
   if (isActive || isRuntimePaused) {
     return (
       <div className="grid">
         <div className="flex justify-center items-center h-96">
-          <p className="border-4 border-cyan-100 p-28 rounded-full text-3xl font-bold bg-cyan-400/15">
+          <CountDownTimer
+            timeLeft={seconds}
+            initialTime={loggedStartDuration}
+          />
+          {/* <p className="border-4 border-cyan-100 p-28 rounded-full text-3xl font-bold bg-cyan-400/15">
             {formatTimeValueDisplay(seconds)}
-          </p>
+          </p> */}
         </div>
 
         <div className="flex justify-center items-center h-24">

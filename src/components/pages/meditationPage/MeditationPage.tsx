@@ -16,12 +16,14 @@ const MeditationPage = () => {
     toggleTimer,
     toggleActiveRuntime,
     isRuntimePaused,
+    loggedStartDuration,
   } = useMeditationTimer();
   return (
     <section className="h-[100dvh] w-[100dvw] bg-cover bg-center bg-no-repeat bg-meditation-screen">
       <ReturnHomeButton />
 
       <TimeDisplay
+        loggedStartDuration={loggedStartDuration as number}
         seconds={duration}
         isActive={isActive}
         isRuntimePaused={isRuntimePaused}

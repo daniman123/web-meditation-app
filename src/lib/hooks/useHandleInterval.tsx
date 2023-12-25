@@ -9,7 +9,7 @@ const useHandleInterval = (
     // eslint-disable-next-line no-undef
     let interval: NodeJS.Timeout;
     if (isActive && !isRuntimePaused) {
-      interval = setInterval(updateSeconds, 1000);
+      interval = setInterval(updateSeconds, 100);
     }
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
