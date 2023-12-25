@@ -1,40 +1,56 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const useAudioPlayer = (
-  isActive: boolean,
-  setIsActive: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsRuntimePaused: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-  const soundEffect = useRef<HTMLAudioElement>();
+const useAudioPlayer = (src: string | undefined) => {
+  const audioRef = useRef<HTMLAudioElement>();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
 
-  useEffect(() => {
-    soundEffect.current = new Audio();
-    soundEffect.current.autoplay = true;
-    soundEffect.current.src =
-      "data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
-    soundEffect.current
-
-      return () => {
-      soundEffect.current = undefined;
-    };
-  }, []);
-
-  const toggleTimer = async () => {
-    if (soundEffect.current) {
-      try {
-        await soundEffect.current.play();
-      } catch (error) {
-        console.log(
-          "🚀 ~ file: useAudioPlayer.tsx:23 ~ toggleTimer ~ error:",
-          error
-        );
+  const togglePlayPause = async () => {
+    const audio = audioRef.current;
+    if (audio) {
+      if (isPlaying) {
+        audio.pause();
+      } else {
+        await audio.play();
       }
-      setIsActive(!isActive);
-      setIsRuntimePaused(false);
+      setIsPlaying(!isPlaying);
     }
   };
 
-  return { soundEffect, toggleTimer };
+  useEffect(() => {
+    if (!src) return;
+
+    audioRef.current = new Audio(src);
+    const audio = audioRef.current;
+
+    const onLoadedMetadata = () => {
+      setDuration(audio.duration);
+    };
+
+    if (audio) {
+      audio.addEventListener("loadedmetadata", onLoadedMetadata);
+
+      audio.addEventListener("timeupdate", updateProgress);
+    }
+
+    return () => {
+      if (audio) {
+        audio.removeEventListener("timeupdate", updateProgress);
+      }
+      audioRef.current = undefined;
+      audio.removeEventListener("loadedmetadata", onLoadedMetadata);
+    };
+  }, [src]);
+
+  const updateProgress = () => {
+    const audio = audioRef.current;
+    if (audio && audio.duration) {
+      setProgress((audio.currentTime / audio.duration) * 1000);
+    }
+  };
+
+  return { togglePlayPause, progress, duration, isPlaying };
 };
 
 export default useAudioPlayer;

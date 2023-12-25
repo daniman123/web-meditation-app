@@ -10,8 +10,8 @@ const CountDownTimer = ({ initialTime, timeLeft }: ICountDownTimer) => {
   const strokeWidth = 10;
   const circumference = 2 * Math.PI * radius;
 
-  const strokeDashoffset =
-    ((initialTime - timeLeft) / initialTime) * circumference;
+  // Calculate the strokeDashoffset to decrease clockwise
+  const strokeDashoffset = (1 - (timeLeft / initialTime)) * circumference;
 
   return (
     <svg
@@ -26,7 +26,7 @@ const CountDownTimer = ({ initialTime, timeLeft }: ICountDownTimer) => {
         r={radius - strokeWidth / 2}
         strokeWidth={strokeWidth}
         fill="none"
-        stroke="white"
+        stroke="#5585b5"
       />
 
       {/* Foreground Circle (Progress) */}
@@ -37,7 +37,7 @@ const CountDownTimer = ({ initialTime, timeLeft }: ICountDownTimer) => {
         strokeWidth={strokeWidth}
         style={{ transition: "stroke-dashoffset 0.1s linear" }}
         fill="none"
-        stroke="#5585b5"
+        stroke="white"
         strokeDasharray={circumference}
         strokeDashoffset={strokeDashoffset}
         transform={`rotate(-90 ${radius} ${radius})`}

@@ -1,42 +1,34 @@
 "use client";
 
+import RenderDurationOptions from "@/components/ui/renderDurationOptions/RenderDurationOptions";
 import ReturnHomeButton from "@/components/ui/routerButton/returnHomeButton/ReturnHomeButton";
-import useMeditationTimer from "@/lib/hooks/useMeditationTimer";
-import TimeValueSelection from "./components/controls/TimeValueSelection";
-import TimeDisplay from "./components/display/TimeDisplay";
+import useAudioPlayer from "@/lib/hooks/useAudioPlayer";
+import { useState } from "react";
+
+import CountDownTimer from "@/components/ui/countDownTimer/CountDownTimer";
+import audioFileRoutes from "../../../lib/services/audioFileManager/audioRoutes.json";
 
 export interface IMeditationPage {}
 
 const MeditationPage = () => {
-  const {
-    duration,
-    setDuration,
-    isActive,
-    resetTimer,
-    toggleTimer,
-    toggleActiveRuntime,
-    isRuntimePaused,
-    loggedStartDuration,
-  } = useMeditationTimer();
+  const [src, setSrc] = useState<string | undefined>();
+
+  const { togglePlayPause, progress, duration, isPlaying } =
+    useAudioPlayer(src);
   return (
     <section className="h-[100dvh] w-[100dvw] bg-cover bg-center bg-no-repeat bg-meditation-screen">
       <ReturnHomeButton />
 
-      <TimeDisplay
-        loggedStartDuration={loggedStartDuration as number}
-        seconds={duration}
-        isActive={isActive}
-        isRuntimePaused={isRuntimePaused}
-        toggleActiveRuntime={toggleActiveRuntime}
-        resetTimer={resetTimer}
-      />
+      <div className="w-full h-1/2">
+        <CountDownTimer initialTime={duration} timeLeft={progress} />
+        <button onClick={togglePlayPause}>
+          {isPlaying ? "Pause" : "Play"}
+        </button>
+      </div>
 
-      <TimeValueSelection
-        isActive={isActive}
-        isRuntimePaused={isRuntimePaused}
-        duration={duration}
-        setDuration={setDuration}
-        toggleTimer={toggleTimer}
+      <RenderDurationOptions
+        audioFileRoutes={audioFileRoutes}
+        setSrc={setSrc}
       />
     </section>
   );

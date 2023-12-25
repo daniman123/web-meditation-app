@@ -1,0 +1,9 @@
+{
+  "15": { "src": "/audio/combined_audio_15min.wav" },
+  "20": { "src": "/audio/combined_audio_20min.wav" },
+  "25": { "src": "/audio/combined_audio_25min.wav" },
+  "30": { "src": "/audio/combined_audio_30min.wav" },
+  "40": { "src": "/audio/combined_audio_40min.wav" },
+  "50": { "src": "/audio/combined_audio_50min.wav" },
+  "60": { "src": "/audio/combined_audio_60min.wav" }
+}
