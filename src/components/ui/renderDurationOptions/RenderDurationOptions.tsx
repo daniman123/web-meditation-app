@@ -17,14 +17,15 @@ const RenderDurationOptions = ({
   speaker,
 }: IRenderDurationOptions) => {
   useEffect(() => {
-    const audioSrc = audioFileRoutes[speaker]["15"].src;
+    const audioSrc = audioFileRoutes[speaker]?.["15"]?.src ?? "";
+
     setSrc(audioSrc);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const dataKey = e.target.value;
-    const audioSrc = audioFileRoutes[speaker][dataKey].src;
+    const audioSrc = audioFileRoutes[speaker]?.[dataKey]?.src ?? "";
 
     setSrc(audioSrc);
   };
@@ -37,7 +38,7 @@ const RenderDurationOptions = ({
         onChange={handleOptionChange}
         className="w-1/2 h-10 shadow-2xl relative outline-none bg-black/20 rounded"
       >
-        {Object.keys(audioFileRoutes[speaker]).map((value, i) => (
+        {Object.keys(audioFileRoutes[speaker] ?? {}).map((value, i) => (
           <Fragment key={i}>
             <Options value={value} />
           </Fragment>

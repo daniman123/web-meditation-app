@@ -6,7 +6,7 @@ import {
   saveToLocalStorage,
 } from "./utils";
 
-const key = dbConfig[0].meditationsLocalStorageKey;
+const key = dbConfig[0]?.meditationsLocalStorageKey as string;
 
 export const logMeditation = (duration: number) => {
   const storedValue = getFromLocalStorage(key);

@@ -20,7 +20,7 @@ const useDurationExpired = (
       setDuration(loggedStartDuration as number);
       return () => {};
     }
-    // return () => {};
+    return () => {};
   }, [duration, loggedStartDuration, setDuration, setIsActive, soundEffect]);
 };
 
