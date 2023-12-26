@@ -1,9 +1,26 @@
 export interface IStyledButton {
-  exampleProp:string,
+  wrapperStyles: string;
+  buttonStyles: string;
+  handleClick: () => void | Promise<void>;
+  buttonLabel?: string;
+  children: React.ReactNode;
 }
 
-const StyledButton = ({exampleProp}:IStyledButton) => {
-    return <div className="StyledButton-container">{exampleProp}</div>;
+const StyledButton = ({
+  wrapperStyles,
+  buttonStyles,
+  handleClick,
+  buttonLabel,
+  children,
+}: IStyledButton) => {
+  return (
+    <div className={wrapperStyles}>
+      <button onClick={handleClick} className={buttonStyles}>
+        {buttonLabel}
+        {children}
+      </button>
+    </div>
+  );
 };
 
 export default StyledButton;

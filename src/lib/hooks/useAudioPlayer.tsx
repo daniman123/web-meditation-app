@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 const useAudioPlayer = (src: string | undefined) => {
   const audioRef = useRef<HTMLAudioElement>();
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
@@ -14,7 +15,20 @@ const useAudioPlayer = (src: string | undefined) => {
       } else {
         await audio.play();
       }
+
       setIsPlaying(!isPlaying);
+    }
+  };
+
+  const toggleRuntime = async () => {
+    const audio = audioRef.current;
+    if (audio) {
+      if (!isPaused) {
+        audio.pause();
+      } else {
+        await audio.play();
+      }
+      setIsPaused(!isPaused);
     }
   };
 
@@ -50,7 +64,14 @@ const useAudioPlayer = (src: string | undefined) => {
     }
   };
 
-  return { togglePlayPause, progress, duration, isPlaying };
+  return {
+    togglePlayPause,
+    progress,
+    duration,
+    isPlaying,
+    isPaused,
+    toggleRuntime,
+  };
 };
 
 export default useAudioPlayer;
