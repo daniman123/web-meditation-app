@@ -6,18 +6,7 @@ export interface IRenderDurationOptions {
   setSrc: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
-export const mapArrayElements = (
-  data: any[],
-  Component: React.ComponentType
-) => {
-  return data.map((value, i) => (
-    <Fragment key={i}>
-      <Component {...value} />
-    </Fragment>
-  ));
-};
-
-export const Options = ({ value }: { value: any }) => {
+export const Options = ({ value }: { value: string }) => {
   return <option value={value}>{value}min</option>;
 };
 
@@ -28,7 +17,7 @@ const RenderDurationOptions = ({
   useEffect(() => {
     const audioSrc = audioFileRoutes[15].src;
     setSrc(audioSrc);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
