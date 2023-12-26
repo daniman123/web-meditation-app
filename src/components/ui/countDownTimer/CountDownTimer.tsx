@@ -11,8 +11,10 @@ const CountDownTimer = ({ initialTime, timeLeft }: ICountDownTimer) => {
   const circumference = 2 * Math.PI * radius;
 
   // Calculate the strokeDashoffset to decrease clockwise
-  const strokeDashoffset = (1 - (timeLeft / initialTime)) * circumference;
-
+  const strokeDashoffset = (1 - timeLeft / initialTime) * circumference;
+  if (isNaN(strokeDashoffset)) {
+    return <></>;
+  }
   return (
     <svg
       width={radius * 2}
