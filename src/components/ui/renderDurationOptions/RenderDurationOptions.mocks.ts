@@ -5,6 +5,7 @@ import { IRenderDurationOptions } from "./RenderDurationOptions";
 const base: IRenderDurationOptions = {
   audioFileRoutes: audioFileRoutesData,
   setSrc: setSrc,
+  speaker:"",
 };
 
 export const mockRenderDurationOptionsProps = {
