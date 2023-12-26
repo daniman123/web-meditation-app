@@ -1,5 +1,7 @@
 export interface IaudioRoutesData {
   [key: string]: {
-    src: string;
+    [key: string]: {
+      src: string;
+    };
   };
 }

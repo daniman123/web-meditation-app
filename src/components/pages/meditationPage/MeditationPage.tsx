@@ -15,6 +15,7 @@ export interface IMeditationPage {}
 
 const MeditationPage = () => {
   const [src, setSrc] = useState<string | undefined>();
+  const [speaker, setSpeaker] = useState<string | undefined>();
 
   const {
     togglePlayPause,
@@ -57,12 +58,13 @@ const MeditationPage = () => {
           </StyledButton>
         </>
       )}
-      {!isPlaying && !isPaused && (
+      {!isPlaying && !isPaused && speaker ? (
         <>
           <TitleBanner fontSize="text-3xl" title="Select Duration" />
           <RenderDurationOptions
             audioFileRoutes={audioFileRoutes}
             setSrc={setSrc}
+            speaker={speaker}
           />
           <StyledButton
             wrapperStyles="flex justify-center items-center"
@@ -79,6 +81,14 @@ const MeditationPage = () => {
             </div>
           </StyledButton>
         </>
+      ) : (
+        !speaker && (
+          <>
+            <TitleBanner fontSize="text-xl" title="Choose Speaker" />
+            <button onClick={() => setSpeaker("JKZ")}>Jon Kabbat-Zinn</button>
+            <button onClick={() => setSpeaker("AP")}>Andy Puddicombe</button>
+          </>
+        )
       )}
     </section>
   );

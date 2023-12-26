@@ -1,9 +1,20 @@
 {
-  "15": { "src": "/audio/combined_audio_15min.mp3" },
-  "20": { "src": "/audio/combined_audio_20min.mp3" },
-  "25": { "src": "/audio/combined_audio_25min.mp3" },
-  "30": { "src": "/audio/combined_audio_30min.mp3" },
-  "40": { "src": "/audio/combined_audio_40min.mp3" },
-  "50": { "src": "/audio/combined_audio_50min.mp3" },
-  "60": { "src": "/audio/combined_audio_60min.mp3" }
+  "JKZ": {
+    "15": { "src": "/audio/JKZ/combined_audio_15min.mp3" },
+    "20": { "src": "/audio/JKZ/combined_audio_20min.mp3" },
+    "25": { "src": "/audio/JKZ/combined_audio_25min.mp3" },
+    "30": { "src": "/audio/JKZ/combined_audio_30min.mp3" },
+    "40": { "src": "/audio/JKZ/combined_audio_40min.mp3" },
+    "50": { "src": "/audio/JKZ/combined_audio_50min.mp3" },
+    "60": { "src": "/audio/JKZ/combined_audio_60min.mp3" }
+  },
+  "AP": {
+    "15": { "src": "/audio/AP/combined_audio_15min.mp3" },
+    "20": { "src": "/audio/AP/combined_audio_20min.mp3" },
+    "25": { "src": "/audio/AP/combined_audio_25min.mp3" },
+    "30": { "src": "/audio/AP/combined_audio_30min.mp3" },
+    "40": { "src": "/audio/AP/combined_audio_40min.mp3" },
+    "50": { "src": "/audio/AP/combined_audio_50min.mp3" },
+    "60": { "src": "/audio/AP/combined_audio_60min.mp3" }
+  }
 }
