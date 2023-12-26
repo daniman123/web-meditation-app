@@ -3,7 +3,7 @@ export interface IStyledButton {
   buttonStyles: string;
   handleClick: () => void | Promise<void>;
   buttonLabel?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const StyledButton = ({

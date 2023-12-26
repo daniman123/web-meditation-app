@@ -1,9 +1,13 @@
-import { IStyledButton } from './StyledButton';
+import { IStyledButton } from "./StyledButton";
 
+export const handleClick = async () => {};
 const base: IStyledButton = {
-  exampleProp: 'Hello world!',
+  buttonStyles: "",
+  children: "",
+  handleClick: handleClick,
+  wrapperStyles: "",
 };
-    
+
 export const mockStyledButtonProps = {
   base,
 };
