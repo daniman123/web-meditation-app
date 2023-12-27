@@ -6,6 +6,7 @@ import useAudioPlayer from "@/lib/hooks/useAudioPlayer";
 import { useState } from "react";
 
 import CountDownTimer from "@/components/ui/countDownTimer/CountDownTimer";
+import RadioButtons from "@/components/ui/radioButtons/RadioButtons";
 import StyledButton from "@/components/ui/styledButton/StyledButton";
 import TitleBanner from "@/components/ui/titleBanner/TitleBanner";
 import Image from "next/image";
@@ -85,8 +86,10 @@ const MeditationPage = () => {
         !speaker && (
           <>
             <TitleBanner fontSize="text-xl" title="Choose Speaker" />
-            <button onClick={() => setSpeaker("JKZ")}>Jon Kabbat-Zinn</button>
-            <button onClick={() => setSpeaker("AP")}>Andy Puddicombe</button>
+            <RadioButtons
+              selectedOption={speaker}
+              setSelectedOption={setSpeaker}
+            />
           </>
         )
       )}
