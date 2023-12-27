@@ -65,7 +65,6 @@ const useAudioPlayer = () => {
     return () => {
       if (audio) {
         audio.removeEventListener("timeupdate", updateProgress);
-        resetAudioPlayer();
       }
       audioRef.current = undefined;
       audio.removeEventListener("loadedmetadata", onLoadedMetadata);

@@ -6,6 +6,7 @@ const base: IMeditationRuntime = {
   toggleRuntime: async () => {},
   resetAudioPlayer: () => {},
   isPaused: true,
+  isPlaying: true,
 };
 
 export const mockMeditationRuntimeProps = {

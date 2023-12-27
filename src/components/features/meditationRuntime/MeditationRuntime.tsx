@@ -3,6 +3,7 @@ import PlayButton from "@/components/ui/audioControls/PlayButton";
 import CountDownTimer from "@/components/ui/countDownTimer/CountDownTimer";
 
 export interface IMeditationRuntime {
+  isPlaying: boolean;
   duration: number;
   progress: number;
   toggleRuntime: () => Promise<void>;
@@ -11,6 +12,7 @@ export interface IMeditationRuntime {
 }
 
 const MeditationRuntime = ({
+  isPlaying,
   duration,
   progress,
   toggleRuntime,
@@ -19,18 +21,21 @@ const MeditationRuntime = ({
 }: IMeditationRuntime) => {
   return (
     <>
-      <div className="w-full h-1/2 flex justify-center items-center">
-        <CountDownTimer initialTime={duration} timeLeft={progress} />
-      </div>
-
-      {!isPaused ? (
-        <PauseButton toggleRuntime={toggleRuntime} />
-      ) : (
+      {isPlaying && (
         <>
-          <PlayButton toggleRuntime={toggleRuntime} />
-          <button onClick={resetAudioPlayer} className="bg-emerald-500">
-            Reset
-          </button>
+          <div className="w-full h-1/2 flex justify-center items-center">
+            <CountDownTimer initialTime={duration} timeLeft={progress} />
+          </div>
+          {!isPaused ? (
+            <PauseButton toggleRuntime={toggleRuntime} />
+          ) : (
+            <>
+              <PlayButton toggleRuntime={toggleRuntime} />
+              <button onClick={resetAudioPlayer} className="bg-emerald-500">
+                Reset
+              </button>
+            </>
+          )}
         </>
       )}
     </>
