@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
+import RadioButton, { IRadioButton } from "./components/RadioButton";
 
 export interface IRadioButtons {
   selectedOption: string | undefined;
@@ -10,30 +11,29 @@ const RadioButtons = ({ setSelectedOption, selectedOption }: IRadioButtons) => {
     setSelectedOption(event.target.value);
   };
 
+  const data: IRadioButton[] = [
+    {
+      value: "JKZ",
+      selectedOption,
+      handleOptionChange,
+      label: "Jon Kabbat-Zinn",
+    },
+    {
+      value: "AP",
+      selectedOption,
+      handleOptionChange,
+      label: "Andy Puddicombe",
+    },
+  ];
+
   return (
     <div className="flex items-center justify-center p-3">
       <div className="grid gap-2">
-        <label className="font-semibold">
-          <input
-            className="mr-2"
-            type="radio"
-            value="JKZ"
-            checked={selectedOption === "JKZ"}
-            onChange={handleOptionChange}
-          />
-          Jon Kabbat-Zinn
-        </label>
-
-        <label className="font-semibold">
-          <input
-            className="mr-2"
-            type="radio"
-            value="AP"
-            checked={selectedOption === "AP"}
-            onChange={handleOptionChange}
-          />
-          Andy Puddicombe
-        </label>
+        {data.map((value, index) => (
+          <React.Fragment key={index}>
+            <RadioButton {...value} />
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
