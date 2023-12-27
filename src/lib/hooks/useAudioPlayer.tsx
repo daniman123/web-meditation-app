@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
-const useAudioPlayer = (src: string | undefined) => {
+const useAudioPlayer = () => {
   const audioRef = useRef<HTMLAudioElement>();
+  const [src, setSrc] = useState<string | undefined>();
+  const [speaker, setSpeaker] = useState<string | undefined>();
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -32,6 +35,17 @@ const useAudioPlayer = (src: string | undefined) => {
     }
   };
 
+  const resetAudioPlayer = () => {
+    audioRef.current = undefined;
+    setSrc(undefined);
+    setSpeaker(undefined);
+
+    setIsPlaying(false);
+    setIsPaused(false);
+    setProgress(0);
+    setDuration(0);
+  };
+
   useEffect(() => {
     if (!src) return;
 
@@ -51,6 +65,7 @@ const useAudioPlayer = (src: string | undefined) => {
     return () => {
       if (audio) {
         audio.removeEventListener("timeupdate", updateProgress);
+        resetAudioPlayer();
       }
       audioRef.current = undefined;
       audio.removeEventListener("loadedmetadata", onLoadedMetadata);
@@ -71,6 +86,10 @@ const useAudioPlayer = (src: string | undefined) => {
     isPlaying,
     isPaused,
     toggleRuntime,
+    setSrc,
+    speaker,
+    setSpeaker,
+    resetAudioPlayer,
   };
 };
 

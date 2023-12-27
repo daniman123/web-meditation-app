@@ -3,9 +3,8 @@
 import RenderDurationOptions from "@/components/ui/renderDurationOptions/RenderDurationOptions";
 import ReturnHomeButton from "@/components/ui/routerButton/returnHomeButton/ReturnHomeButton";
 import useAudioPlayer from "@/lib/hooks/useAudioPlayer";
-import { useState } from "react";
 
-import CountDownTimer from "@/components/ui/countDownTimer/CountDownTimer";
+import MeditationRuntime from "@/components/features/meditationRuntime/MeditationRuntime";
 import RadioButtons from "@/components/ui/radioButtons/RadioButtons";
 import StyledButton from "@/components/ui/styledButton/StyledButton";
 import TitleBanner from "@/components/ui/titleBanner/TitleBanner";
@@ -15,9 +14,6 @@ import audioFileRoutes from "../../../lib/services/audioFileManager/audioRoutes.
 export interface IMeditationPage {}
 
 const MeditationPage = () => {
-  const [src, setSrc] = useState<string | undefined>();
-  const [speaker, setSpeaker] = useState<string | undefined>();
-
   const {
     togglePlayPause,
     progress,
@@ -25,39 +21,23 @@ const MeditationPage = () => {
     isPlaying,
     isPaused,
     toggleRuntime,
-  } = useAudioPlayer(src);
+    setSrc,
+    speaker,
+    setSpeaker,
+    resetAudioPlayer,
+  } = useAudioPlayer();
+
   return (
     <section className="h-[100dvh] w-[100dvw] bg-cover bg-center bg-no-repeat bg-meditation-screen">
       <ReturnHomeButton />
       {isPlaying && (
-        <>
-          <div className="w-full h-1/2 flex justify-center items-center">
-            <CountDownTimer initialTime={duration} timeLeft={progress} />
-          </div>
-          <StyledButton
-            wrapperStyles="flex justify-center items-center"
-            buttonStyles="w-20 h-20 p-3 rounded-full text-white font-semibold"
-            handleClick={toggleRuntime}
-          >
-            <div className="relative w-full h-full bg-white rounded-full">
-              {!isPaused ? (
-                <Image
-                  alt=""
-                  src={"/pause-button.svg"}
-                  layout="fill"
-                  objectFit="contain"
-                />
-              ) : (
-                <Image
-                  alt=""
-                  src={"/play-button.svg"}
-                  layout="fill"
-                  objectFit="contain"
-                />
-              )}
-            </div>
-          </StyledButton>
-        </>
+        <MeditationRuntime
+          duration={duration}
+          progress={progress}
+          toggleRuntime={toggleRuntime}
+          resetAudioPlayer={resetAudioPlayer}
+          isPaused={isPaused}
+        />
       )}
       {!isPlaying && !isPaused && speaker ? (
         <>
