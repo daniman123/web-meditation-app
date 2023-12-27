@@ -11,26 +11,30 @@ const RadioButtons = ({ setSelectedOption, selectedOption }: IRadioButtons) => {
   };
 
   return (
-    <div>
-      <label>
-        <input
-          type="radio"
-          value="JKZ"
-          checked={selectedOption === "JKZ"}
-          onChange={handleOptionChange}
-        />
-        Jon Kabbat-Zinn
-      </label>
+    <div className="flex items-center justify-center p-3">
+      <div className="grid gap-2">
+        <label className="font-semibold">
+          <input
+            className="mr-2"
+            type="radio"
+            value="JKZ"
+            checked={selectedOption === "JKZ"}
+            onChange={handleOptionChange}
+          />
+          Jon Kabbat-Zinn
+        </label>
 
-      <label>
-        <input
-          type="radio"
-          value="AP"
-          checked={selectedOption === "AP"}
-          onChange={handleOptionChange}
-        />
-        Andy Puddicombe
-      </label>
+        <label className="font-semibold">
+          <input
+            className="mr-2"
+            type="radio"
+            value="AP"
+            checked={selectedOption === "AP"}
+            onChange={handleOptionChange}
+          />
+          Andy Puddicombe
+        </label>
+      </div>
     </div>
   );
 };
