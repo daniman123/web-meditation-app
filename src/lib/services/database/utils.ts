@@ -1,6 +1,6 @@
 import { ILocalStorageData } from "./types";
 
-export function getFromLocalStorage(key: string) {
+export function getFromLocalStorage(key: string){
   const item = localStorage.getItem(key);
   return item ? JSON.parse(item) : [];
 }
