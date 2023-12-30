@@ -37,14 +37,19 @@ const useAudioPlayer = () => {
   };
 
   const resetAudioPlayer = () => {
-    audioRef.current = undefined;
     setSrc(undefined);
+    audioRef.current = undefined;
     setSpeaker(undefined);
 
     setIsPlaying(false);
     setIsPaused(false);
     setProgress(0);
     setDuration(0);
+  };
+
+  const handleAudioEnded = () => {
+    logMeditation(duration);
+    resetAudioPlayer();
   };
 
   useEffect(() => {
@@ -55,39 +60,28 @@ const useAudioPlayer = () => {
 
     const onLoadedMetadata = () => {
       setDuration(audio.duration);
-      console.log(audio.duration);
     };
 
     if (audio) {
       audio.addEventListener("loadedmetadata", onLoadedMetadata);
-
       audio.addEventListener("timeupdate", updateProgress);
+      audio.addEventListener("ended", handleAudioEnded);
     }
 
     return () => {
-      if (audio) {
-        audio.removeEventListener("timeupdate", updateProgress);
-      }
-      audioRef.current = undefined;
       audio.removeEventListener("loadedmetadata", onLoadedMetadata);
+      audio.removeEventListener("timeupdate", updateProgress);
+      audio.removeEventListener("ended", handleAudioEnded);
+      audioRef.current = undefined;
+      audio.src = "";
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src]);
 
   const updateProgress = () => {
     const audio = audioRef.current;
     if (audio && audio.duration) {
       setProgress((audio.currentTime / audio.duration) * 1000);
-      if (audio.currentTime === audio.duration) {
-        console.log("is finsih");
-        console.log(
-          "curernt time",
-          audio.currentTime,
-          "duration",
-          audio.duration
-        );
-        logMeditation(duration);
-      }
     }
   };
 
