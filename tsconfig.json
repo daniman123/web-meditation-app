@@ -60,6 +60,6 @@
     "src/lib/testHooks/UseTestHook.test.js",
     "src/lib/hooks/useMeditationTimer.test.js",
     ".eslintrc.json"
-  ],
+, "src/lib/hooks/useAudioPlayer.test.js"  ],
   "exclude": ["node_modules", "src/**/*.test.js"]
 }

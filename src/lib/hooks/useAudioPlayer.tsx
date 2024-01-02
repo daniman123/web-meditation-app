@@ -47,11 +47,6 @@ const useAudioPlayer = () => {
     setDuration(0);
   };
 
-  const handleAudioEnded = () => {
-    logMeditation(duration);
-    resetAudioPlayer();
-  };
-
   useEffect(() => {
     if (!src) return;
 
@@ -60,6 +55,7 @@ const useAudioPlayer = () => {
 
     const onLoadedMetadata = () => {
       setDuration(audio.duration);
+      console.log(audio.duration);
     };
 
     if (audio) {
@@ -83,6 +79,11 @@ const useAudioPlayer = () => {
     if (audio && audio.duration) {
       setProgress((audio.currentTime / audio.duration) * 1000);
     }
+  };
+
+  const handleAudioEnded = () => {
+    logMeditation(audioRef.current?.duration as number);
+    resetAudioPlayer();
   };
 
   return {
