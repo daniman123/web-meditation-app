@@ -1,7 +1,10 @@
 "use client";
 
 import { ILocalStorageData } from "@/lib/services/database/types";
-import { formatDateTime, getFromLocalStorage } from "@/lib/services/database/utils";
+import {
+  formatDateTime,
+  getFromLocalStorage,
+} from "@/lib/services/database/utils";
 import { Fragment, useEffect, useState } from "react";
 
 export interface ISettingsPage {}
@@ -30,17 +33,26 @@ const SettingsPage = () => {
 
   const renderData = () => {
     return (
-      storedData &&
-      storedData.map((value, index) => (
-        <Fragment key={index}>
-          <div className="flex gap-2 border-b">
-            date:
-            <span className="border-l">{formatDateTime(value.dateTime)}</span>
-            duration:
-            <span>{value.duration / 60} m.</span>
-          </div>
-        </Fragment>
-      ))
+      <div className="max-w-full w-full">
+        <div className="flex border-b">
+          <p className="text-center w-1/2  font-semibold">Date:</p>
+          <p className="text-center w-1/2 font-semibold">Duration:</p>
+        </div>
+
+        {storedData &&
+          storedData.map((value, index) => (
+            <Fragment key={index}>
+              <div className="flex border-b">
+                <p className=" w-1/2 text-center text-sm">
+                  {formatDateTime(value.dateTime)}
+                </p>
+                <p className="w-1/2 text-center text-sm">
+                  {Math.ceil(value.duration / 60)} m.
+                </p>
+              </div>
+            </Fragment>
+          ))}
+      </div>
     );
   };
 
@@ -49,7 +61,7 @@ const SettingsPage = () => {
       {renderData()}
       <button
         onClick={() => deleteAll()}
-        className="bg-emerald-600 p-3 rounded-3xl text-white font-semibold"
+        className=" bg-emerald-600 p-2 rounded-3xl text-white font-semibold"
       >
         Delete All Logs
       </button>
