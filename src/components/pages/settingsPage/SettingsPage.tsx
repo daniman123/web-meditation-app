@@ -1,7 +1,7 @@
 "use client";
 
 import { ILocalStorageData } from "@/lib/services/database/types";
-import { getFromLocalStorage } from "@/lib/services/database/utils";
+import { formatDateTime, getFromLocalStorage } from "@/lib/services/database/utils";
 import { Fragment, useEffect, useState } from "react";
 
 export interface ISettingsPage {}
@@ -33,11 +33,11 @@ const SettingsPage = () => {
       storedData &&
       storedData.map((value, index) => (
         <Fragment key={index}>
-          <div className="flex gap-2">
+          <div className="flex gap-2 border-b">
             date:
-            <span>{value.dateTime}</span>
+            <span className="border-l">{formatDateTime(value.dateTime)}</span>
             duration:
-            <span>{value.duration}</span>
+            <span>{value.duration / 60} m.</span>
           </div>
         </Fragment>
       ))
@@ -45,7 +45,7 @@ const SettingsPage = () => {
   };
 
   return (
-    <div className="grid grid-flow-row auto-rows-auto">
+    <div className="h-[100dvh] w-[100dvw] grid grid-flow-row auto-rows-auto">
       {renderData()}
       <button
         onClick={() => deleteAll()}
