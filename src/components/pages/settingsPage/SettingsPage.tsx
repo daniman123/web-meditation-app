@@ -47,7 +47,7 @@ const SettingsPage = () => {
                   {formatDateTime(value.dateTime)}
                 </p>
                 <p className="w-1/2 text-center text-sm">
-                  {Math.ceil(value.duration / 60)} m.
+                  {Math.floor(value.duration / 60)}m.
                 </p>
               </div>
             </Fragment>

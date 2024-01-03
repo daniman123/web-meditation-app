@@ -1,9 +1,7 @@
-import { ISettingsPage } from './SettingsPage';
+import { ISettingsPage } from "./SettingsPage";
 
-const base: ISettingsPage = {
-  exampleProp: 'Hello world!',
-};
-    
+const base: ISettingsPage = {};
+
 export const mockSettingsPageProps = {
   base,
 };
