@@ -22,4 +22,8 @@ export const Primary: Story = {
     ...mockMeditationStatsProps.primary,
   },
 };
-
+export const Secondary: Story = {
+  args: {
+    ...mockMeditationStatsProps.secondary,
+  },
+};
