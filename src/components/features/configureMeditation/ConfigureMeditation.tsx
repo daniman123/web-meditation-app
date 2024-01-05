@@ -1,7 +1,7 @@
-import RadioButtons from "@/components/ui/radioButtons/RadioButtons";
 import RenderDurationOptions from "@/components/ui/renderDurationOptions/RenderDurationOptions";
 import StyledButton from "@/components/ui/styledButton/StyledButton";
 import TitleBanner from "@/components/ui/titleBanner/TitleBanner";
+import TitledRadioButtons from "@/components/ui/titledRadioButtons/TitledRadioButtons";
 import { IaudioRoutesData } from "@/lib/services/audioFileManager/types";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
@@ -29,6 +29,28 @@ const ConfigureMeditation = ({
   category,
   setCategory,
 }: IConfigureMeditation) => {
+  const dataCategory = [
+    {
+      value: "sleep",
+      label: "Sleep",
+    },
+    {
+      value: "stress",
+      label: "Stress",
+    },
+  ];
+
+  const dataSpeaker = [
+    {
+      value: "JKZ",
+      label: "Jon Kabbat-Zinn",
+    },
+    {
+      value: "AP",
+      label: "Andy Puddicombe",
+    },
+  ];
+
   return (
     <>
       {!isPlaying && !isPaused && speaker ? (
@@ -57,20 +79,21 @@ const ConfigureMeditation = ({
             </StyledButton>
           </>
         ) : (
-          <>
-            <button onClick={() => setCategory("sleep")}>Sleep</button>
-            <button onClick={() => setCategory("stress")}>Stress</button>
-          </>
+          <TitledRadioButtons
+            title="Select Category"
+            data={dataCategory}
+            selectedOption={category}
+            setSelectedOption={setCategory}
+          />
         )
       ) : (
         !speaker && (
-          <>
-            <TitleBanner fontSize="text-xl" title="Choose Speaker" />
-            <RadioButtons
-              selectedOption={speaker}
-              setSelectedOption={setSpeaker}
-            />
-          </>
+          <TitledRadioButtons
+            title="Choose Speaker"
+            data={dataSpeaker}
+            selectedOption={speaker}
+            setSelectedOption={setSpeaker}
+          />
         )
       )}
     </>
