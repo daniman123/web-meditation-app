@@ -8,6 +8,8 @@ const base: IConfigureMeditation = {
   setSrc: () => {},
   speaker: "",
   togglePlayPause: async () => {},
+  category: "",
+  setCategory: () => {},
 };
 
 export const mockConfigureMeditationProps = {

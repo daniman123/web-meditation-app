@@ -21,6 +21,8 @@ const MeditationPage = () => {
     speaker,
     setSpeaker,
     resetAudioPlayer,
+    category,
+    setCategory,
   } = useAudioPlayer();
 
   return (
@@ -44,6 +46,8 @@ const MeditationPage = () => {
         setSrc={setSrc}
         speaker={speaker as string}
         togglePlayPause={togglePlayPause}
+        category={category as string}
+        setCategory={setCategory}
       />
     </section>
   );

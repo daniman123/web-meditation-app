@@ -5,6 +5,7 @@ const useAudioPlayer = () => {
   const audioRef = useRef<HTMLAudioElement>();
   const [src, setSrc] = useState<string | undefined>();
   const [speaker, setSpeaker] = useState<string | undefined>();
+  const [category, setCategory] = useState<string | undefined>();
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -40,6 +41,7 @@ const useAudioPlayer = () => {
     setSrc(undefined);
     audioRef.current = undefined;
     setSpeaker(undefined);
+    setCategory(undefined);
 
     setIsPlaying(false);
     setIsPaused(false);
@@ -97,6 +99,8 @@ const useAudioPlayer = () => {
     speaker,
     setSpeaker,
     resetAudioPlayer,
+    category,
+    setCategory,
   };
 };
 
