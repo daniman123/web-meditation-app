@@ -1,13 +1,4 @@
-import { IMeditationRuntime } from "./MeditationRuntime";
-
-const base: IMeditationRuntime = {
-  duration: 15,
-  progress: 0,
-  toggleRuntime: async () => {},
-  resetAudioPlayer: () => {},
-  isPaused: true,
-  isPlaying: true,
-};
+const base = {};
 
 export const mockMeditationRuntimeProps = {
   base,

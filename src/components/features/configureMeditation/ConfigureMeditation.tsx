@@ -1,34 +1,26 @@
+import PlayButton from "@/components/ui/audioControls/PlayButton";
 import RenderDurationOptions from "@/components/ui/renderDurationOptions/RenderDurationOptions";
-import StyledButton from "@/components/ui/styledButton/StyledButton";
 import TitleBanner from "@/components/ui/titleBanner/TitleBanner";
 import TitledRadioButtons from "@/components/ui/titledRadioButtons/TitledRadioButtons";
 import { IaudioRoutesData } from "@/lib/services/audioFileManager/types";
-import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
+import { useAudioPlayerContext } from "../audioPlayerProvider/AudioPlayerProvider";
 
 export interface IConfigureMeditation {
-  isPlaying: boolean;
-  isPaused: boolean;
   audioFileRoutes: IaudioRoutesData;
-  setSrc: Dispatch<SetStateAction<string | undefined>>;
-  togglePlayPause: () => Promise<void>;
-  speaker: string;
-  setSpeaker: Dispatch<SetStateAction<string | undefined>>;
-  category: string;
-  setCategory: Dispatch<SetStateAction<string | undefined>>;
 }
 
-const ConfigureMeditation = ({
-  isPlaying,
-  isPaused,
-  speaker,
-  audioFileRoutes,
-  setSrc,
-  togglePlayPause,
-  setSpeaker,
-  category,
-  setCategory,
-}: IConfigureMeditation) => {
+const ConfigureMeditation = ({ audioFileRoutes }: IConfigureMeditation) => {
+  const {
+    isPlaying,
+    isPaused,
+    speaker,
+    setSrc,
+    togglePlayPause,
+    setSpeaker,
+    category,
+    setCategory,
+  } = useAudioPlayerContext();
+
   const dataCategory = [
     {
       value: "sleep",
@@ -63,20 +55,8 @@ const ConfigureMeditation = ({
               speaker={speaker}
               category={category}
             />
-            <StyledButton
-              wrapperStyles="flex justify-center items-center"
-              buttonStyles="w-24 h-24 p-3 rounded-full  text-white font-semibold"
-              handleClick={togglePlayPause}
-            >
-              <div className="relative w-full h-full bg-white rounded-full">
-                <Image
-                  alt=""
-                  src={"/play-button.svg"}
-                  layout="fill"
-                  objectFit="contain"
-                />
-              </div>
-            </StyledButton>
+
+            <PlayButton toggleRuntime={togglePlayPause} />
           </>
         ) : (
           <TitledRadioButtons

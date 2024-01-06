@@ -1,41 +1,27 @@
-import PauseButton from "@/components/ui/audioControls/PauseButton";
-import PlayButton from "@/components/ui/audioControls/PlayButton";
-import CountDownTimer from "@/components/ui/countDownTimer/CountDownTimer";
+import ControlButtons from "@/components/ui/audioControls/AudioControls";
+import TimerDisplay from "@/components/ui/timerDisplay/TimerDisplay";
+import { useAudioPlayerContext } from "../audioPlayerProvider/AudioPlayerProvider";
 
-export interface IMeditationRuntime {
-  isPlaying: boolean;
-  duration: number;
-  progress: number;
-  toggleRuntime: () => Promise<void>;
-  resetAudioPlayer: () => void;
-  isPaused: boolean;
-}
+const MeditationRuntime = () => {
+  const {
+    progress,
+    duration,
+    isPlaying,
+    isPaused,
+    toggleRuntime,
+    resetAudioPlayer,
+  } = useAudioPlayerContext();
 
-const MeditationRuntime = ({
-  isPlaying,
-  duration,
-  progress,
-  toggleRuntime,
-  isPaused,
-  resetAudioPlayer,
-}: IMeditationRuntime) => {
   return (
     <>
       {isPlaying && (
         <>
-          <div className="w-full h-1/2 flex justify-center items-center">
-            <CountDownTimer initialTime={duration} timeLeft={progress} />
-          </div>
-          {!isPaused ? (
-            <PauseButton toggleRuntime={toggleRuntime} />
-          ) : (
-            <>
-              <PlayButton toggleRuntime={toggleRuntime} />
-              <button onClick={resetAudioPlayer} className="bg-emerald-500">
-                Reset
-              </button>
-            </>
-          )}
+          <TimerDisplay duration={duration} progress={progress} />
+          <ControlButtons
+            isPaused={isPaused}
+            toggleRuntime={toggleRuntime}
+            resetAudioPlayer={resetAudioPlayer}
+          />
         </>
       )}
     </>
