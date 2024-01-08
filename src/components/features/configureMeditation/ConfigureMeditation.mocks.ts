@@ -1,8 +1,4 @@
-import { IConfigureMeditation } from "./ConfigureMeditation";
-
-const base: IConfigureMeditation = {
-  audioFileRoutes: {},
-};
+const base = {};
 
 export const mockConfigureMeditationProps = {
   base,

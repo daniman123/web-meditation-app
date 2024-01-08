@@ -1,9 +1,7 @@
 import { SetStateAction } from "react";
-import audioFileRoutesData from "../../../lib/services/audioFileManager/audioRoutes.json";
 import { IRenderDurationOptions } from "./RenderDurationOptions";
 
 const base: IRenderDurationOptions = {
-  audioFileRoutes: audioFileRoutesData,
   setSrc: setSrc,
   speaker: "",
   category: "",

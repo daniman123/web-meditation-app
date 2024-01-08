@@ -2,14 +2,9 @@ import PlayButton from "@/components/ui/audioControls/PlayButton";
 import RenderDurationOptions from "@/components/ui/renderDurationOptions/RenderDurationOptions";
 import TitleBanner from "@/components/ui/titleBanner/TitleBanner";
 import TitledRadioButtons from "@/components/ui/titledRadioButtons/TitledRadioButtons";
-import { IaudioRoutesData } from "@/lib/services/audioFileManager/types";
 import { useAudioPlayerContext } from "../audioPlayerProvider/AudioPlayerProvider";
 
-export interface IConfigureMeditation {
-  audioFileRoutes: IaudioRoutesData;
-}
-
-const ConfigureMeditation = ({ audioFileRoutes }: IConfigureMeditation) => {
+const ConfigureMeditation = () => {
   const {
     isPlaying,
     isPaused,
@@ -50,7 +45,6 @@ const ConfigureMeditation = ({ audioFileRoutes }: IConfigureMeditation) => {
           <>
             <TitleBanner fontSize="text-3xl" title="Select Duration" />
             <RenderDurationOptions
-              audioFileRoutes={audioFileRoutes}
               setSrc={setSrc}
               speaker={speaker}
               category={category}

@@ -1,19 +1,22 @@
-import { IaudioRoutesData } from "@/lib/services/audioFileManager/types";
 import { Fragment, useEffect } from "react";
 
+import { IaudioRoutesData } from "@/lib/services/audioFileManager/types";
+import audioFileRoutesData from "../../../lib/services/audioFileManager/audioRoutes.json";
+
 export interface IRenderDurationOptions {
-  audioFileRoutes: IaudioRoutesData;
   setSrc: React.Dispatch<React.SetStateAction<string | undefined>>;
   speaker: string;
   category: string;
 }
+
+const audioFileRoutes: IaudioRoutesData =
+  audioFileRoutesData as IaudioRoutesData;
 
 export const Options = ({ value }: { value: string }) => {
   return <option value={value}>{value}min</option>;
 };
 
 const RenderDurationOptions = ({
-  audioFileRoutes,
   setSrc,
   speaker,
   category,

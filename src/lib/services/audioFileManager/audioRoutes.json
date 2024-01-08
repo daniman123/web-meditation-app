@@ -1,42 +1,33 @@
 {
-  "JKZ": {
-    "sleep": {
-      "15": { "src": "/audio/JKZ/sleep/combined_audio_15min.mp3" },
-      "20": { "src": "/audio/JKZ/sleep/combined_audio_20min.mp3" },
-      "25": { "src": "/audio/JKZ/sleep/combined_audio_25min.mp3" },
-      "30": { "src": "/audio/JKZ/sleep/combined_audio_30min.mp3" },
-      "40": { "src": "/audio/JKZ/sleep/combined_audio_40min.mp3" },
-      "50": { "src": "/audio/JKZ/sleep/combined_audio_50min.mp3" },
-      "60": { "src": "/audio/JKZ/sleep/combined_audio_60min.mp3" }
+  "default": {
+    "JKZ": {
+      "15": { "src": "/audio/default/JKZ/combined_audio_15min.mp3" },
+      "20": { "src": "/audio/default/JKZ/combined_audio_20min.mp3" },
+      "25": { "src": "/audio/default/JKZ/combined_audio_25min.mp3" },
+      "30": { "src": "/audio/default/JKZ/combined_audio_30min.mp3" },
+      "40": { "src": "/audio/default/JKZ/combined_audio_40min.mp3" },
+      "50": { "src": "/audio/default/JKZ/combined_audio_50min.mp3" },
+      "60": { "src": "/audio/default/JKZ/combined_audio_60min.mp3" }
     },
-    "stress": {
-      "15": { "src": "/audio/JKZ/stress/combined_audio_15min.mp3" },
-      "20": { "src": "/audio/JKZ/stress/combined_audio_20min.mp3" },
-      "25": { "src": "/audio/JKZ/stress/combined_audio_25min.mp3" },
-      "30": { "src": "/audio/JKZ/stress/combined_audio_30min.mp3" },
-      "40": { "src": "/audio/JKZ/stress/combined_audio_40min.mp3" },
-      "50": { "src": "/audio/JKZ/stress/combined_audio_50min.mp3" },
-      "60": { "src": "/audio/JKZ/stress/combined_audio_60min.mp3" }
+    "AP": {
+      "15": { "src": "/audio/default/AP/combined_audio_15min.mp3" },
+      "20": { "src": "/audio/default/AP/combined_audio_20min.mp3" },
+      "25": { "src": "/audio/default/AP/combined_audio_25min.mp3" },
+      "30": { "src": "/audio/default/AP/combined_audio_30min.mp3" },
+      "40": { "src": "/audio/default/AP/combined_audio_40min.mp3" },
+      "50": { "src": "/audio/default/AP/combined_audio_50min.mp3" },
+      "60": { "src": "/audio/default/AP/combined_audio_60min.mp3" }
     }
   },
-  "AP": {
-    "sleep": {
-      "15": { "src": "/audio/AP/sleep/combined_audio_15min.mp3" },
-      "20": { "src": "/audio/AP/sleep/combined_audio_20min.mp3" },
-      "25": { "src": "/audio/AP/sleep/combined_audio_25min.mp3" },
-      "30": { "src": "/audio/AP/sleep/combined_audio_30min.mp3" },
-      "40": { "src": "/audio/AP/sleep/combined_audio_40min.mp3" },
-      "50": { "src": "/audio/AP/sleep/combined_audio_50min.mp3" },
-      "60": { "src": "/audio/AP/sleep/combined_audio_60min.mp3" }
-    },
-    "stress": {
-      "15": { "src": "/audio/AP/stress/combined_audio_15min.mp3" },
-      "20": { "src": "/audio/AP/stress/combined_audio_20min.mp3" },
-      "25": { "src": "/audio/AP/stress/combined_audio_25min.mp3" },
-      "30": { "src": "/audio/AP/stress/combined_audio_30min.mp3" },
-      "40": { "src": "/audio/AP/stress/combined_audio_40min.mp3" },
-      "50": { "src": "/audio/AP/stress/combined_audio_50min.mp3" },
-      "60": { "src": "/audio/AP/stress/combined_audio_60min.mp3" }
+  "sleep": {
+    "AP": {
+      "15": { "src": "/audio/sleep/AP/combined_audio_15min.mp3" },
+      "20": { "src": "/audio/sleep/AP/combined_audio_20min.mp3" },
+      "25": { "src": "/audio/sleep/AP/combined_audio_25min.mp3" },
+      "30": { "src": "/audio/sleep/AP/combined_audio_30min.mp3" },
+      "40": { "src": "/audio/sleep/AP/combined_audio_40min.mp3" },
+      "50": { "src": "/audio/sleep/AP/combined_audio_50min.mp3" },
+      "60": { "src": "/audio/sleep/AP/combined_audio_60min.mp3" }
     }
   }
 }
