@@ -1,3 +1,4 @@
+import { logMeditation } from "@/lib/services/database/dataBaseManager";
 import { useEffect, useRef, useState } from "react";
 
 const useAudioPlayback = (src: string) => {
@@ -9,18 +10,23 @@ const useAudioPlayback = (src: string) => {
   useEffect(() => {
     const audio = audioRef.current;
     audio.src = src;
+
     audio.addEventListener("loadedmetadata", () => {
       setDuration(audio.duration);
     });
     audio.addEventListener("timeupdate", () => {
       setCurrentTime(audio.currentTime);
     });
+    audio.addEventListener("ended", () => {
+      logMeditation(duration);
+    });
     return () => {
       audio.pause();
       audio.removeEventListener("loadedmetadata", () => {});
       audio.removeEventListener("timeupdate", () => {});
+      audio.removeEventListener("ended", () => {});
     };
-  }, [src]);
+  }, [src, duration]);
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
