@@ -5,9 +5,16 @@ import { Fragment } from "react";
 export interface IMeditationLogs {
   storedData: ILocalStorageData[] | undefined;
   deleteAll: () => void;
+  downloadJson: () => void;
+  uploadJson: (_event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const MeditationLogs = ({ storedData, deleteAll }: IMeditationLogs) => {
+const MeditationLogs = ({
+  storedData,
+  deleteAll,
+  downloadJson,
+  uploadJson,
+}: IMeditationLogs) => {
   const renderData = () => {
     return (
       <div className="max-w-full w-full">
@@ -41,6 +48,15 @@ const MeditationLogs = ({ storedData, deleteAll }: IMeditationLogs) => {
       >
         Delete All Logs
       </button>
+      <div className="flex">
+        <label>
+          Import Data
+          <input type="file" name="upload" id="" onChange={uploadJson} />
+        </label>
+        <button className="bg-emerald-400" onClick={downloadJson}>
+          Export Data
+        </button>
+      </div>
     </div>
   );
 };

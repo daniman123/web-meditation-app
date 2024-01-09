@@ -15,6 +15,8 @@ const SettingsPage = () => {
     totalTime,
     storedData,
     deleteAll,
+    downloadJson,
+    uploadJson,
   } = useMeditationLog();
 
   return (
@@ -28,7 +30,12 @@ const SettingsPage = () => {
         totalTimeMeditated={totalTime}
       />
 
-      <MeditationLogs storedData={storedData} deleteAll={deleteAll} />
+      <MeditationLogs
+        storedData={storedData}
+        deleteAll={deleteAll}
+        downloadJson={downloadJson}
+        uploadJson={uploadJson}
+      />
     </div>
   );
 };

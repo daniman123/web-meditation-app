@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   calculateTotalTimeMeditated,
   getAverageTotalSessionsPerDay,
@@ -40,6 +40,40 @@ const useMeditationLog = () => {
     setStoredData([]);
   };
 
+  const uploadJson = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const fileReader = new FileReader();
+      const file = event.target.files?.[0];
+
+      if (file && file.type === "application/json") {
+        fileReader.readAsText(file, "UTF-8");
+        fileReader.onload = (e) => {
+          try {
+            const data = JSON.parse(e.target?.result as string);
+            setStoredData(data);
+            localStorage.setItem("meditationsLog", JSON.stringify(data));
+          } catch (error) {
+            console.error("Error reading file:", error);
+          }
+        };
+      }
+    },
+    []
+  );
+
+  const downloadJson = useCallback(() => {
+    const dataStr = JSON.stringify(storedData);
+    const dataUri =
+      "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+
+    const exportFileDefaultName = "meditationsLog.json";
+
+    const linkElement = document.createElement("a");
+    linkElement.setAttribute("href", dataUri);
+    linkElement.setAttribute("download", exportFileDefaultName);
+    linkElement.click();
+  }, [storedData]);
+
   return {
     storedData,
     totalTime,
@@ -47,6 +81,8 @@ const useMeditationLog = () => {
     averageSession,
     averageSessionsPerDay,
     deleteAll,
+    uploadJson,
+    downloadJson,
   };
 };
 

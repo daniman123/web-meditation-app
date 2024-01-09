@@ -15,7 +15,7 @@ const MeditationStats = ({
     <div className="flex justify-center p-3">
       <div className="w-full grid grid-rows-5 p-4 bg-gray-300 rounded-lg">
         <p className="row-span-2 flex items-center text-2xl">
-          Total Time Meditated: {totalTimeMeditated.toFixed(2)}m.
+          Total Time Meditated: {(totalTimeMeditated / 60).toFixed(2)}h.
         </p>
         <p>- Total Sessions Meditated: {totalSessionsMeditated}</p>
         <p>- Average Session Length: {averageSessionLength.toFixed(2)}m.</p>
