@@ -21,3 +21,27 @@ export const getAudioSrc = (cat: string, spkr: string, dur: string): string => {
     return durationData ? durationData.src : "";
   }
 };
+
+import { useMemo } from "react";
+
+// Generic function to extract keys based on provided path.
+const extractKeys = (path: string[]): string[] => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let currentObject: any = audioFileRoutes;
+  for (const key of path) {
+    currentObject = (currentObject as IAudioFileRoutes)[key] ?? {};
+    if (Object.keys(currentObject).length === 0) break;
+  }
+  return Object.keys(currentObject);
+};
+
+export const useAudioData = (category: string, speaker: string) => {
+  const categories = useMemo(() => extractKeys([]), []);
+  const speakers = useMemo(() => extractKeys([category]), [category]);
+  const durations = useMemo(
+    () => extractKeys([category, speaker]),
+    [category, speaker]
+  );
+
+  return { categories, speakers, durations };
+};

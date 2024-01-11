@@ -1,13 +1,31 @@
 import React from "react";
+// import { ICategory } from "../audioSelector/AudioSelector";
 
-export type Component = React.ComponentType<{ data: string }>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ICategory = any;
 
-const withDataRenderer = (Component:Component) => {
-  const DataRenderer = ({ dataArray }: { dataArray: string[] }) => (
+export type Component = React.ComponentType<ICategory | string>;
+
+const withDataRenderer = (Component: Component) => {
+  const DataRenderer = ({
+    dataArray,
+  }: {
+    dataArray: ICategory[] | string[];
+  }) => (
     <>
-      {dataArray.map((data, index) => (
-        <Component key={index} data={data} />
-      ))}
+      {dataArray.map((data, index) => {
+        const isObject = typeof data === "object" && data !== null;
+
+        return (
+          <React.Fragment key={index}>
+            {isObject ? (
+              <Component {...(data as ICategory)} />
+            ) : (
+              <Component data={data} />
+            )}
+          </React.Fragment>
+        );
+      })}
     </>
   );
 
@@ -18,30 +36,3 @@ const withDataRenderer = (Component:Component) => {
 };
 
 export default withDataRenderer;
-
-/*
-EXAMPLE:
-
-// Example usage of the HOC
-const DataItem = ({ data }: { data: string }) => (
-  <option value={data}>{data}</option>
-);
-
-// Optional: Set a display name for DataItem
-DataItem.displayName = 'DataItem';
-
-const EnhancedComponent = withDataRenderer(DataItem);
-
-
-const App = () => {
-  const dataArray = ['Item 1', 'Item 2', 'Item 3'];
-
-  return (
-    <div>
-      <EnhancedComponent dataArray={dataArray} />
-    </div>
-  );
-};
-
-export default App;
-*/
