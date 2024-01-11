@@ -1,34 +1,10 @@
-import RadioButton from "@/components/ui/radioButtons/components/RadioButton";
+import React from 'react';
+import RadioButtonGroup from "@/components/ui/radioButtons/RadioButtons";
 import useAudioSelector from "@/lib/hooks/useAudioSelector/useAudioSelector";
 import AudioPlayback from "../audioPlayback/AudioPlayback";
+import DurationSelector from "./components/DurationSelector";
 
-export interface IRadioButtonGroup {
-  options: string[];
-  handleOptionChange: (_e: React.ChangeEvent<HTMLInputElement>) => void;
-  selectedOption: string;
-}
-
-const RadioButtonGroup = ({
-  options,
-  handleOptionChange,
-  selectedOption,
-}: IRadioButtonGroup) => (
-  <>
-    {options.map((option) => (
-      <RadioButton
-        key={option}
-        handleOptionChange={handleOptionChange}
-        label={option}
-        selectedOption={selectedOption}
-        value={option}
-      />
-    ))}
-  </>
-);
-
-export interface IAudioSelector {}
-
-const AudioSelector = () => {
+const AudioSelector: React.FC = () => {
   const {
     audioSrc,
     categories,
@@ -42,41 +18,22 @@ const AudioSelector = () => {
     speakers,
   } = useAudioSelector();
 
+  const renderSelectors = (): JSX.Element | null => {
+    if (!category) {
+      return <RadioButtonGroup options={categories} handleOptionChange={handleCategoryChange} selectedOption={category} />;
+    }
+    if (!speaker) {
+      return <RadioButtonGroup options={speakers} handleOptionChange={handleSpeakerChange} selectedOption={speaker} />;
+    }
+    if (!duration) {
+      return <DurationSelector duration={duration} durations={durations} handleDurationChange={handleDurationChange} speaker={speaker} />;
+    }
+    return null;
+  };
+
   return (
     <div className="grid">
-      {!category && (
-        <RadioButtonGroup
-          options={categories}
-          handleOptionChange={handleCategoryChange}
-          selectedOption={category}
-        />
-      )}
-
-      {category && !speaker && (
-        <RadioButtonGroup
-          options={speakers}
-          handleOptionChange={handleSpeakerChange}
-          selectedOption={speaker}
-        />
-      )}
-
-      {category && speaker && (
-        <select
-          value={duration}
-          onChange={handleDurationChange}
-          disabled={!speaker}
-        >
-          <option value="">Select Duration</option>
-          {durations.map((dur) => (
-            <option key={dur} value={dur}>
-              {dur}
-            </option>
-          ))}
-        </select>
-      )}
-
-      
-
+      {renderSelectors()}
       {audioSrc && <AudioPlayback src={audioSrc} />}
     </div>
   );

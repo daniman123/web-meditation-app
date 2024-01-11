@@ -1,8 +1,8 @@
-import { IRadioButtons } from "./RadioButtons";
+import { IRadioButtonGroup } from "./RadioButtons";
 
-const base: IRadioButtons = {
+const base: IRadioButtonGroup = {
+  handleOptionChange: () => {},
   selectedOption: "",
-  setSelectedOption: () => {},
   options: [],
 };
 
