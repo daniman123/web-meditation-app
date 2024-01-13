@@ -1,7 +1,10 @@
 import MeditationPage from "@/components/pages/meditationPage/MeditationPage";
+import React from "react";
+
+const MemoMeditationPage = React.memo(MeditationPage);
 
 const meditation = () => {
-  return <MeditationPage />;
+  return <MemoMeditationPage />;
 };
 
 export default meditation;

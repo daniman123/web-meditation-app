@@ -1,3 +1,4 @@
+import React from "react";
 import withDataRenderer from "../../withDataRenderer/WithDataRenderer";
 import DurationSelectorItem from "./DurationSelectorItem";
 
@@ -9,6 +10,7 @@ export interface IDurationSelector {
 }
 
 const EnhancedComponent = withDataRenderer(DurationSelectorItem);
+const EnhancedComponentMemo = React.memo(EnhancedComponent);
 
 const DurationSelector = ({
   duration,
@@ -23,7 +25,7 @@ const DurationSelector = ({
     aria-label="Select Duration"
   >
     <option value="">Select Duration</option>
-    <EnhancedComponent dataArray={durations} />
+    <EnhancedComponentMemo dataArray={durations} />
   </select>
 );
 

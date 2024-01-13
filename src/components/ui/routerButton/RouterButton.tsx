@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { memo } from "react";
 
 export interface IRouterButton {
   wrapperStyles: string;
@@ -7,7 +8,7 @@ export interface IRouterButton {
   route: string;
 }
 
-const RouterButton = ({
+const RouterButtons = ({
   buttonLabel,
   buttonStyles,
   route,
@@ -21,5 +22,7 @@ const RouterButton = ({
     </div>
   );
 };
+
+const RouterButton = memo(RouterButtons);
 
 export default RouterButton;

@@ -1,5 +1,4 @@
 import React from "react";
-// import { ICategory } from "../audioSelector/AudioSelector";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ICategory = any;
@@ -7,6 +6,8 @@ type ICategory = any;
 export type Component = React.ComponentType<ICategory | string>;
 
 const withDataRenderer = (Component: Component) => {
+  const MemoizedComponent = React.memo(Component);
+
   const DataRenderer = ({
     dataArray,
   }: {
@@ -19,9 +20,9 @@ const withDataRenderer = (Component: Component) => {
         return (
           <React.Fragment key={index}>
             {isObject ? (
-              <Component {...(data as ICategory)} />
+              <MemoizedComponent {...(data as ICategory)} />
             ) : (
-              <Component data={data} />
+              <MemoizedComponent data={data} />
             )}
           </React.Fragment>
         );
