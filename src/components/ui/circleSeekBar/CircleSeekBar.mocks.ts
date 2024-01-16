@@ -1,8 +1,8 @@
 import { ICircularSeekBar } from "./CircleSeekBar";
 
 const base: ICircularSeekBar = {
-  currentTime: 0,
-  duration: 0,
+  currentTime: 25,
+  duration: 100,
   handleSeek: () => {},
 };
 

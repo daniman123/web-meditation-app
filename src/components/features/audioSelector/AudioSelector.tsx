@@ -1,89 +1,78 @@
-import RadioButtonGroup from "@/components/ui/radioButtons/RadioButtons";
-import useAudioSelector from "@/lib/hooks/useAudioSelector/useAudioSelector";
-import { useValueState } from "@/lib/hooks/useAudioSelector/useValueState";
-import { useAudioData } from "@/lib/hooks/useAudioSelector/utils";
+import StyledButton from "@/components/ui/styledButton/StyledButton";
+import TitleBanner from "@/components/ui/titleBanner/TitleBanner";
 import React from "react";
-import withDataRenderer from "../withDataRenderer/WithDataRenderer";
-import DurationSelector from "./components/DurationSelector";
+import { useAudioSelectorContext } from "../audioContextProvider/AudioContextProvider";
 
-const CategorySelector = ({
-  categories,
-  handleCategoryChange,
-  category,
+export const RenderArray = ({
+  dataArray,
+  setValue,
 }: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  categories: any[];
-  category: string;
-  handleCategoryChange: (_e: React.ChangeEvent<HTMLInputElement>) => void;
+  dataArray: string[];
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 }) =>
-  !category ? (
-    <RadioButtonGroup
-      options={categories}
-      handleOptionChange={handleCategoryChange}
-      selectedOption={category}
+  dataArray.map((value, index) => (
+    <StyledButton
+      key={index}
+      wrapperStyles="flex justify-center"
+      buttonStyles="w-28 p-2 rounded-3xl bg-emerald-500 text-white opacity-90 hover:opacity-100 transition-opacity"
+      buttonLabel={value}
+      handleClick={() => setValue(value)}
     />
-  ) : null;
+  ));
 
-export const Duration = ({
-  duration,
-  durations,
-  handleDurationChange,
-  speaker,
-}: {
-  speaker: string;
-  duration: string;
-  durations: string[];
-  handleDurationChange: (_e: React.ChangeEvent<HTMLSelectElement>) => void;
-}) =>
-  !duration && speaker ? (
-    <DurationSelector
-      duration={duration}
-      durations={durations}
-      handleDurationChange={handleDurationChange}
-      speaker={speaker}
-    />
-  ) : null;
+export const AudioSelector = () => {
+  const {
+    category,
+    speaker,
+    duration,
+    setCategory,
+    setDuration,
+    setSpeaker,
+    categories,
+    durations,
+    speakers,
+  } = useAudioSelectorContext();
 
-const EnhancedComponent = withDataRenderer(CategorySelector);
-
-const AudioSelector = ({
-  setAudioSrc,
-}: {
-  setAudioSrc: React.Dispatch<React.SetStateAction<string>>;
-}) => {
-  const { value: category, handleValueChange: handleCategoryChange } =
-    useValueState();
-  const { value: speaker, handleValueChange: handleSpeakerChange } =
-    useValueState();
-  const { value: duration, handleValueChange: handleDurationChange } =
-    useValueState();
-
-  useAudioSelector(setAudioSrc, category, speaker, duration);
-
-  const { categories, speakers, durations } = useAudioData(category, speaker);
-
-  const dataArray = [
+  const selectionTypes = [
     {
-      category,
-      categories,
-      handleCategoryChange,
+      configTitle: "Select Category",
+      dataArray: categories,
+      setValue: setCategory,
+      displayConfig: category,
+      showIndex: !category && !speaker && !duration,
     },
     {
-      category: speaker,
-      categories: speakers,
-      handleCategoryChange: handleSpeakerChange,
+      configTitle: "Select Speaker",
+      dataArray: speakers,
+      setValue: setSpeaker,
+      displayConfig: speaker,
+      showIndex: category && !speaker && !duration,
+    },
+    {
+      configTitle: "Select Duration",
+      dataArray: durations,
+      setValue: setDuration,
+      displayConfig: duration,
+      showIndex: category && speaker && !duration,
     },
   ];
 
   return (
-    <div className="grid">
-      <EnhancedComponent dataArray={dataArray} />
-      <Duration
-        duration={duration}
-        durations={durations}
-        handleDurationChange={handleDurationChange}
-        speaker={speaker}
-      />
+    <div className="grid gap-3 font-semibold">
+      {selectionTypes.map((value, index) => (
+        <>
+          {value.showIndex && (
+            <>
+              <TitleBanner title={value.configTitle} fontSize="text-2xl" />
+              <RenderArray
+                key={index}
+                dataArray={value.dataArray}
+                setValue={value.setValue}
+              />
+            </>
+          )}
+        </>
+      ))}
     </div>
   );
 };

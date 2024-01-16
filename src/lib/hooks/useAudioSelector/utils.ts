@@ -45,3 +45,15 @@ export const useAudioData = (category: string, speaker: string) => {
 
   return { categories, speakers, durations };
 };
+
+export type TsetValue = React.Dispatch<React.SetStateAction<string>>;
+
+export const resetState = (setValue: TsetValue) => {
+  setValue("");
+};
+
+export const resetAudioSelction = (stateSetters: TsetValue[]) => {
+  stateSetters.forEach((setter) => {
+    setter("");
+  });
+};

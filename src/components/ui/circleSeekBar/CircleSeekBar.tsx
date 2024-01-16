@@ -28,9 +28,17 @@ const CircularSeekBar = ({
       <circle
         cx="150"
         cy="150"
+        r={radius * 0.75}
+        fill="#eee"
+        stroke="#eee"
+        strokeWidth="30"
+      />
+      <circle
+        cx="150"
+        cy="150"
         r={radius}
         fill="none"
-        stroke="#eee"
+        stroke="transparent"
         strokeWidth="30"
         onMouseDown={handleMouseEvent}
         onMouseMove={handleMouseEvent}

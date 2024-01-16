@@ -8,14 +8,14 @@ const useAudioControl = (audioRef: React.RefObject<HTMLAudioElement>) => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    if (isPlaying) {
+    if (!audio.paused) {
       pauseAudio(audio);
-      setIsPlaying(false);
+      setIsPlaying(true);
     } else {
       playAudio(audio);
-      setIsPlaying(true);
+      setIsPlaying(false);
     }
-  }, [audioRef, isPlaying]);
+  }, [audioRef]);
 
   const handleSeek = useCallback(
     (time: number) => {

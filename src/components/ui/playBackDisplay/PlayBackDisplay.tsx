@@ -14,11 +14,13 @@ const PlayBackDisplay = ({
 }: IPlayBackDisplay) => {
   return (
     <>
-      <CircularSeekBar
-        currentTime={currentTime}
-        duration={duration}
-        handleSeek={handleSeek}
-      />
+      <div className="w-full flex justify-center">
+        <CircularSeekBar
+          currentTime={currentTime}
+          duration={duration}
+          handleSeek={handleSeek}
+        />
+      </div>
       <TimeDisplay currentTime={currentTime} duration={duration} />
     </>
   );

@@ -9,5 +9,5 @@ export const useValueState = () => {
     setValue(e.target.value);
   };
 
-  return { value, handleValueChange };
+  return { value, handleValueChange, setValue };
 };
