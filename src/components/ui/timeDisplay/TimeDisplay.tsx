@@ -7,8 +7,10 @@ export interface ITimeDisplay {
 
 const TimeDisplay = ({ currentTime, duration }: ITimeDisplay) => {
   return (
-    <div>
-      {formatTime(currentTime)} / {formatTime(duration)}
+    <div className="flex items-center justify-center p-3 text-white font-semibold text-3xl">
+      <p>
+        {formatTime(currentTime)} / {formatTime(duration)}
+      </p>
     </div>
   );
 };

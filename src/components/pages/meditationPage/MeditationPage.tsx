@@ -10,7 +10,8 @@ const MemoReturnButton = React.memo(ReturnHomeButton);
 
 const MeditationPage = () => {
   return (
-    <section className="h-[100dvh] w-[100dvw] bg-cover bg-center bg-no-repeat bg-meditation-screen">
+    // <section className="h-[100dvh] w-[100dvw] bg-cover bg-center bg-no-repeat bg-meditation-screen">
+    <section className="h-[100dvh] w-[100dvw] animate-gradientShift">
       <MemoReturnButton />
       <MeditationContent />
     </section>

@@ -7,7 +7,7 @@ const useCircleSeekBar = (angle: number, radius: number) => {
     [angle, circumference]
   );
 
-  return { strokeDashoffset, radius };
+  return { strokeDashoffset };
 };
 
 export default useCircleSeekBar;

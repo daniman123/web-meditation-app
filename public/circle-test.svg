@@ -1,0 +1,18 @@
+<svg viewBox="0 0 120 120">
+    <style>
+        .dashed-circle {
+            fill: none;
+            stroke: blue;
+            stroke-width: 10;
+            stroke-dasharray: calc(2 * 3.14 * 20);
+            stroke-dashoffset: calc(-2 * 3.14 * 20 * 0.1);
+            transform: rotate(-90deg, 25, 25);
+        }
+    </style>
+    <!-- <circle r="20" cx="25" cy="25" fill="none" stroke="white" stroke-width="10" />
+    <circle class="dashed-circle" r="20" cx="25" cy="25" /> -->
+
+    <circle r="20" cx="25" cy="25" fill="none" stroke="white" stroke-width="10" />
+    <circle class="dashed-circle" r="20" cx="25" cy="25" />
+
+</svg>

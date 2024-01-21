@@ -1,21 +1,25 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { pauseAudio, playAudio, seekAudio } from "./utils";
 
-const useAudioControl = (audioRef: React.RefObject<HTMLAudioElement>) => {
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
-
+const useAudioControl = (
+  audioRef: React.RefObject<HTMLAudioElement>,
+  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>
+) => {
   const togglePlayPause = useCallback(() => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio) {
+      setIsPlaying(false);
+      return;
+    }
 
     if (!audio.paused) {
       pauseAudio(audio);
-      setIsPlaying(true);
+      setIsPlaying(false);
     } else {
       playAudio(audio);
-      setIsPlaying(false);
+      setIsPlaying(true);
     }
-  }, [audioRef]);
+  }, [audioRef, setIsPlaying]);
 
   const handleSeek = useCallback(
     (time: number) => {
@@ -27,7 +31,7 @@ const useAudioControl = (audioRef: React.RefObject<HTMLAudioElement>) => {
     [audioRef]
   );
 
-  return { isPlaying, togglePlayPause, handleSeek };
+  return { togglePlayPause, handleSeek };
 };
 
 export default useAudioControl;

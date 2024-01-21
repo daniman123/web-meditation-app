@@ -17,6 +17,7 @@ const StyledButton = ({
     <div className={wrapperStyles}>
       <button onClick={handleClick} className={buttonStyles}>
         {buttonLabel}
+
         {children}
       </button>
     </div>

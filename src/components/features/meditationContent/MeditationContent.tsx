@@ -7,8 +7,8 @@ const MeditationContent = () => {
     <AudioContextProvider>
       <div className="flex justify-center">
         <AudioSelector />
+        <AudioPlayback />
       </div>
-      <AudioPlayback />
     </AudioContextProvider>
   );
 };

@@ -56,22 +56,21 @@ export const AudioSelector = () => {
       showIndex: category && speaker && !duration,
     },
   ];
-
+  if (category && speaker && duration) return;
   return (
     <div className="grid gap-3 font-semibold">
       {selectionTypes.map((value, index) => (
-        <>
+        <React.Fragment key={index}>
           {value.showIndex && (
             <>
               <TitleBanner title={value.configTitle} fontSize="text-2xl" />
               <RenderArray
-                key={index}
                 dataArray={value.dataArray}
                 setValue={value.setValue}
               />
             </>
           )}
-        </>
+        </React.Fragment>
       ))}
     </div>
   );
