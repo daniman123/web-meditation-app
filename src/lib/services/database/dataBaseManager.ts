@@ -1,5 +1,5 @@
 import dbConfig from "./db.config.json";
-import { ILocalStorageData } from "./types";
+// import { ILocalStorageData } from "./types";
 import {
   getFromLocalStorage,
   resetLocalStorage,
@@ -58,4 +58,57 @@ export const getAverageTotalSessionsPerDay = (data: ILocalStorageData[]) => {
     Object.keys(sessionCounts).length;
 
   return averageSessionsPerDay;
+};
+
+export interface ILocalStorageData {
+  dateTime: string;
+  duration: number;
+}
+
+// Function to calculate current streak of daily observations
+export const calculateCurrentStreak = (data: ILocalStorageData[]): number => {
+  if (data.length === 0) return 0;
+
+  // Sort data by dateTime
+  const sortedData = data.sort(
+    (a, b) => new Date(a.dateTime).getTime() - new Date(b.dateTime).getTime()
+  );
+
+  if (!sortedData[0]) return 0;
+
+  let currentStreak = 1; // Start with 1 to include the last observation
+  // Assuming sortedData[0].dateTime is a Unix timestamp in milliseconds
+  let previousDate = new Date(parseInt(sortedData[0].dateTime, 10));
+
+  // Iterate over sorted observations starting from the second item
+
+  for (let i = 1; i < sortedData.length; i++) {
+    const element = sortedData[i];
+    if (!element) {
+      continue;
+    }
+    const currentDate = new Date(parseInt(element.dateTime, 10));
+    const diffInTime = currentDate.getTime() - previousDate.getTime();
+    const diffInDays = diffInTime / (1000 * 3600 * 24);
+
+    // Check if the current and previous dates are consecutive
+    if (diffInDays === 1) {
+      currentStreak++;
+    } else if (diffInDays > 1) {
+      // Reset streak if gap is more than one day
+      currentStreak = 1;
+    }
+    previousDate = currentDate;
+  }
+
+  // Optionally, check if the last observation was today and adjust streak accordingly
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Normalize today's date to midnight for comparison
+
+  if (previousDate < today) {
+    // If the last observation wasn't today, the streak ended with the last observation
+    currentStreak = 0;
+  }
+
+  return currentStreak;
 };

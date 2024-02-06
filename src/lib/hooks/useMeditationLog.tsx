@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import {
+  calculateCurrentStreak,
   calculateTotalTimeMeditated,
   getAverageTotalSessionsPerDay,
 } from "../services/database/dataBaseManager";
@@ -15,6 +16,7 @@ const useMeditationLog = () => {
   const [totalSessions, setTotalSessions] = useState(0);
   const [averageSession, setAverageSession] = useState(0);
   const [averageSessionsPerDay, setAverageSessionsPerDay] = useState(0);
+  const [streak, setStreak] = useState(0);
 
   useEffect(() => {
     const allData = getFromLocalStorage("meditationsLog");
@@ -24,11 +26,13 @@ const useMeditationLog = () => {
   useEffect(() => {
     if (!storedData) return;
 
+    const newCurrentStreak = calculateCurrentStreak(storedData);
     const newTotalTime = calculateTotalTimeMeditated(storedData) / 60;
     const newTotalSessions = storedData.length;
     const newAverageSession = newTotalTime / newTotalSessions;
     const newAverageSessionsPerDay = getAverageTotalSessionsPerDay(storedData);
 
+    setStreak(newCurrentStreak);
     setTotalTime(newTotalTime);
     setTotalSessions(newTotalSessions);
     setAverageSession(newAverageSession);
@@ -77,6 +81,7 @@ const useMeditationLog = () => {
   return {
     storedData,
     totalTime,
+    streak,
     totalSessions,
     averageSession,
     averageSessionsPerDay,

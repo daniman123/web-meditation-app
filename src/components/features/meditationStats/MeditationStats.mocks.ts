@@ -1,6 +1,7 @@
 import { IMeditationStats } from "./MeditationStats";
 
 const base: IMeditationStats = {
+  currentStreak: 1,
   totalTimeMeditated: 0,
   totalSessionsMeditated: 0,
   averageSessionLength: 0,
@@ -8,6 +9,7 @@ const base: IMeditationStats = {
 };
 
 const primary: IMeditationStats = {
+  currentStreak: 1,
   totalTimeMeditated: (12 * 1200) / 60,
   totalSessionsMeditated: 12,
   averageSessionLength: 1200 / 60,
@@ -26,6 +28,7 @@ const averageSession = totalTime / totalSessions;
 const averageSessionsPerDay = getAverageTotalSessionsPerDay(mockData);
 
 const secondary: IMeditationStats = {
+  currentStreak: 1,
   totalTimeMeditated: totalTime as number,
   totalSessionsMeditated: totalSessions,
   averageSessionLength: averageSession,

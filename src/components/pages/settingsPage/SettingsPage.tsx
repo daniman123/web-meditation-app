@@ -17,6 +17,7 @@ const SettingsPage = () => {
     deleteAll,
     downloadJson,
     uploadJson,
+    streak,
   } = useMeditationLog();
 
   return (
@@ -24,6 +25,7 @@ const SettingsPage = () => {
       <ReturnHomeButton />
 
       <MeditationStats
+        currentStreak={streak}
         averageSessionLength={averageSession}
         averageTotalSessionsPerDay={averageSessionsPerDay}
         totalSessionsMeditated={totalSessions}
