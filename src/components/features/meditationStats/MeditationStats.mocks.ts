@@ -17,18 +17,20 @@ const primary: IMeditationStats = {
 };
 
 import {
+  calculateCurrentStreak,
   calculateTotalTimeMeditated,
   getAverageTotalSessionsPerDay,
 } from "@/lib/services/database/dataBaseManager";
 import mockData from "../../../lib/services/database/mockData/MOCK_DATA.json";
 
+const currentStreak = calculateCurrentStreak(mockData);
 const totalTime = calculateTotalTimeMeditated(mockData) / 60;
 const totalSessions = mockData.length;
 const averageSession = totalTime / totalSessions;
 const averageSessionsPerDay = getAverageTotalSessionsPerDay(mockData);
 
 const secondary: IMeditationStats = {
-  currentStreak: 1,
+  currentStreak: currentStreak,
   totalTimeMeditated: totalTime as number,
   totalSessionsMeditated: totalSessions,
   averageSessionLength: averageSession,

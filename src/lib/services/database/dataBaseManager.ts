@@ -74,11 +74,11 @@ export const calculateCurrentStreak = (data: ILocalStorageData[]): number => {
     (a, b) => new Date(a.dateTime).getTime() - new Date(b.dateTime).getTime()
   );
 
-  if (!sortedData[0]) return 0;
-
   let currentStreak = 1; // Start with 1 to include the last observation
-  // Assuming sortedData[0].dateTime is a Unix timestamp in milliseconds
-  let previousDate = new Date(parseInt(sortedData[0].dateTime, 10));
+
+  let previousDate = new Date(
+    parseInt(sortedData[sortedData.length - 2]?.dateTime as string, 10)
+  );
 
   // Iterate over sorted observations starting from the second item
 
@@ -88,13 +88,15 @@ export const calculateCurrentStreak = (data: ILocalStorageData[]): number => {
       continue;
     }
     const currentDate = new Date(parseInt(element.dateTime, 10));
+
     const diffInTime = currentDate.getTime() - previousDate.getTime();
+
     const diffInDays = diffInTime / (1000 * 3600 * 24);
 
     // Check if the current and previous dates are consecutive
-    if (diffInDays === 1) {
+    if (diffInDays >= 0.5 && diffInDays < 1.5) {
       currentStreak++;
-    } else if (diffInDays > 1) {
+    } else if (diffInDays > 1.5) {
       // Reset streak if gap is more than one day
       currentStreak = 1;
     }
@@ -103,6 +105,7 @@ export const calculateCurrentStreak = (data: ILocalStorageData[]): number => {
 
   // Optionally, check if the last observation was today and adjust streak accordingly
   const today = new Date();
+
   today.setHours(0, 0, 0, 0); // Normalize today's date to midnight for comparison
 
   if (previousDate < today) {
