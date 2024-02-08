@@ -1,3 +1,5 @@
+"use client"
+
 import MeditationContent from "@/components/features/meditationContent/MeditationContent";
 import ReturnHomeButton from "@/components/ui/routerButton/returnHomeButton/ReturnHomeButton";
 
