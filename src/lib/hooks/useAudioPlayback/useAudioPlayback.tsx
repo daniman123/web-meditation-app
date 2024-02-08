@@ -1,3 +1,4 @@
+"use client"
 import { useAudioSelectorContext } from "@/components/features/audioContextProvider/AudioContextProvider";
 import useAudioControl from "@/lib/hooks/useAudioPlayback/useAudioControl";
 import useAudioEvents from "@/lib/hooks/useAudioPlayback/useAudioEvents";
