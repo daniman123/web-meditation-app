@@ -1,3 +1,5 @@
+"use client";
+
 import useAudioSelector from "@/lib/hooks/useAudioSelector/useAudioSelector";
 import { useAudioData } from "@/lib/hooks/useAudioSelector/utils";
 import { createContext, useContext, useState } from "react";
