@@ -1,6 +1,4 @@
-import { IMeditationPage } from "./MeditationPage";
-
-const base: IMeditationPage = {};
+const base = {};
 
 export const mockMeditationPageProps = {
   base,

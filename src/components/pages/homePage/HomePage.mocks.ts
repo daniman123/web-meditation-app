@@ -1,6 +1,4 @@
-import { IHomePage } from "./HomePage";
-
-const base: IHomePage = {};
+const base = {};
 
 export const mockHomePageProps = {
   base,

@@ -5,8 +5,6 @@ import MeditationStats from "@/components/features/meditationStats/MeditationSta
 import ReturnHomeButton from "@/components/ui/routerButton/returnHomeButton/ReturnHomeButton";
 import useMeditationLog from "@/lib/hooks/useMeditationLog";
 
-export interface ISettingsPage {}
-
 const SettingsPage = () => {
   const {
     averageSession,

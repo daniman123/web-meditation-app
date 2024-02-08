@@ -1,62 +1,22 @@
 import TitleBanner from "@/components/ui/titleBanner/TitleBanner";
-import React, { useMemo } from "react";
-import { useAudioSelectorContext } from "../audioContextProvider/AudioContextProvider";
+import useCreateSelectionTypes from "@/lib/hooks/useAudioSelector/useCreateSelectionTypes";
+import useSelectionState from "@/lib/hooks/useAudioSelector/useSelectionState";
+import React from "react";
 import RenderArray from "./components/RenderArray";
 
-const createSelectionType = (
-  title: string,
-  dataArray: string[],
-  setValue: React.Dispatch<React.SetStateAction<string>>,
-  showIndex: string | boolean
-) => ({
-  configTitle: title,
-  dataArray,
-  setValue,
-  showIndex,
-});
-
-const isAllSelected = (category: string, speaker: string, duration: string) =>
-  category && speaker && duration;
-
+/**
+ * AudioSelector component for selecting audio attributes.
+ */
 const AudioSelector: React.FC = () => {
-  const {
-    category,
-    speaker,
-    duration,
-    setCategory,
-    setDuration,
-    setSpeaker,
-    categories,
-    durations,
-    speakers,
-  } = useAudioSelectorContext();
-
-  const selectionTypes = useMemo(
-    () => [
-      createSelectionType(
-        "Select Category",
-        categories,
-        setCategory,
-        !category && !speaker && !duration
-      ),
-      createSelectionType(
-        "Select Speaker",
-        speakers,
-        setSpeaker,
-        category && !speaker && !duration
-      ),
-      createSelectionType(
-        "Select Duration",
-        durations,
-        setDuration,
-        category && speaker && !duration
-      ),
-    ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [category, speaker, duration, categories, speakers, durations]
+  const { selectionData, selectionState, setSelection, isAllSelected } =
+    useSelectionState();
+  const selectionTypes = useCreateSelectionTypes(
+    selectionState,
+    selectionData,
+    setSelection
   );
 
-  if (isAllSelected(category, speaker, duration)) return null;
+  if (isAllSelected()) return null;
 
   return (
     <div className="grid gap-3 font-semibold">

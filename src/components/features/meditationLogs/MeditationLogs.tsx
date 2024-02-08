@@ -1,6 +1,8 @@
+// MeditationLogs.tsx
+import { MeditationLogList } from "@/components/ui/meditationLogList/MeditationLogList";
+import { useFileHandlers } from "@/lib/hooks/useFileHandlers";
 import { ILocalStorageData } from "@/lib/services/database/types";
-import { formatDateTime } from "@/lib/services/database/utils";
-import { Fragment } from "react";
+import React from "react";
 
 export interface IMeditationLogs {
   storedData: ILocalStorageData[] | undefined;
@@ -9,51 +11,36 @@ export interface IMeditationLogs {
   uploadJson: (_event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const MeditationLogs = ({
+/**
+ * Component to manage and display meditation logs.
+ */
+const MeditationLogs: React.FC<IMeditationLogs> = ({
   storedData,
   deleteAll,
   downloadJson,
   uploadJson,
-}: IMeditationLogs) => {
-  const renderData = () => {
-    return (
-      <div className="max-w-full w-full">
-        <div className="flex border-b">
-          <p className="text-center w-1/2  font-semibold">Date:</p>
-          <p className="text-center w-1/2 font-semibold">Duration:</p>
-        </div>
+}) => {
+  const fileHandlers = useFileHandlers(downloadJson, uploadJson);
 
-        {storedData &&
-          storedData.map((value, index) => (
-            <Fragment key={index}>
-              <div className="flex border-b">
-                <p className=" w-1/2 text-center text-sm">
-                  {formatDateTime(value.dateTime)}
-                </p>
-                <p className="w-1/2 text-center text-sm">
-                  {Math.floor(value.duration / 60)}m.
-                </p>
-              </div>
-            </Fragment>
-          ))}
-      </div>
-    );
-  };
+  if (!storedData || storedData.length === 0) {
+    return <div>No meditation logs found.</div>;
+  }
+
   return (
-    <div className="">
-      {renderData()}
+    <div>
+      <MeditationLogList storedData={storedData} />
       <button
         onClick={deleteAll}
-        className=" bg-emerald-600 p-2 rounded-3xl text-white font-semibold"
+        className="bg-emerald-600 p-2 rounded-3xl text-white font-semibold"
       >
         Delete All Logs
       </button>
       <div className="flex">
         <label>
           Import Data
-          <input type="file" name="upload" id="" onChange={uploadJson} />
+          <input type="file" onChange={fileHandlers.uploadJson} />
         </label>
-        <button className="bg-emerald-400" onClick={downloadJson}>
+        <button onClick={fileHandlers.downloadJson} className="bg-emerald-400">
           Export Data
         </button>
       </div>
@@ -61,4 +48,4 @@ const MeditationLogs = ({
   );
 };
 
-export default MeditationLogs;
+export default React.memo(MeditationLogs);
