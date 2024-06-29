@@ -28,7 +28,7 @@ const PlayPauseButton = ({ togglePlayPause, isPlaying }: IPlayPauseButton) => {
     <>
       {isPlaying ? (
         <StyledButton
-          wrapperStyles="flex justify-center"
+          wrapperStyles="flex justify-center animate-pulse"
           buttonStyles={commonStyle}
           handleClick={togglePlayPause}
         >
