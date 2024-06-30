@@ -27,7 +27,7 @@ const MeditationLogs: React.FC<IMeditationLogs> = ({
   }
 
   return (
-    <div>
+    <div className="w-full">
       <MeditationLogList storedData={storedData} />
       <button
         onClick={deleteAll}
